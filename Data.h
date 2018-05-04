@@ -73,6 +73,14 @@ public:
     // Contrat :
     //
 
+    vector<Attribut> getAttributs(){
+        return Attributs;
+    }
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
 //------------------------------------------------------------------ PRIVE
 
 protected:
