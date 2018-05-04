@@ -1,7 +1,7 @@
 /*************************************************************************
 Attribut  -  description
 -------------------
-début                : $DATE$
+dï¿½but                : $DATE$
 copyright            : (C) $YEAR$ par $AUTHOR$
 e-mail               : $EMAIL$
 *************************************************************************/
@@ -10,14 +10,14 @@ e-mail               : $EMAIL$
 #if ! defined ( ATTRIBUT_H )
 #define ATTRIBUT_H
 
-//--------------------------------------------------- Interfaces utilisées
+//--------------------------------------------------- Interfaces utilisï¿½es
 
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <Attribut>
+// Rï¿½le de la classe <Attribut>
 //
 //
 //------------------------------------------------------------------------
@@ -27,15 +27,15 @@ class Attribut
 	//----------------------------------------------------------------- PUBLIC
 
 public:
-	//----------------------------------------------------- Méthodes publiques
+	//----------------------------------------------------- Mï¿½thodes publiques
 	string getNom();
-	/* Get du nom l'élément Attribut */
+	/* Get du nom l'ï¿½lï¿½ment Attribut */
 
 	Type getType();
-	/*Get type de l'élément Attribut*/
+	/*Get type de l'ï¿½lï¿½ment Attribut*/
 
 
-	//------------------------------------------------- Surcharge d'opérateurs
+	//------------------------------------------------- Surcharge d'opï¿½rateurs
 	
 
 	//-------------------------------------------- Constructeurs - destructeur
@@ -60,14 +60,15 @@ public:
 	//------------------------------------------------------------------ PRIVE
 
 protected:
-	//----------------------------------------------------- Méthodes protégées
+	//----------------------------------------------------- Mï¿½thodes protï¿½gï¿½es
 
-	//----------------------------------------------------- Attributs protégés
+	//----------------------------------------------------- Attributs protï¿½gï¿½s
 	string nom;
 	Type type;
 };
 
-//-------------------------------- Autres définitions dépendantes de <Attribut>
+enum Type {LONG, BOOL, INT, DOUBLE, STRING };
+//-------------------------------- Autres dï¿½finitions dï¿½pendantes de <Attribut>
 
 #endif // ATTRIBUT_H
 

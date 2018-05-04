@@ -1,16 +1,16 @@
 /*************************************************************************
 Attribut  -  description
 -------------------
-début                : $DATE$
+dï¿½but                : $DATE$
 copyright            : (C) $YEAR$ par $AUTHOR$
 e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Réalisation de la classe <Attribut> (fichier Attribut.cpp) ----------
+//---------- Rï¿½alisation de la classe <Attribut> (fichier Attribut.cpp) ----------
 
 //---------------------------------------------------------------- INCLUDE
 
-//-------------------------------------------------------- Include système
+//-------------------------------------------------------- Include systï¿½me
 using namespace std;
 #include <iostream>
 
@@ -18,21 +18,20 @@ using namespace std;
 #include "Attribut.h"
 
 //------------------------------------------------------------- Constantes
-enum Type = {long, bool; int; double; string };
 //----------------------------------------------------------------- PUBLIC
 
-//----------------------------------------------------- Méthodes publiques
+//----------------------------------------------------- Mï¿½thodes publiques
 
 string Attribut::getNom() {
-	return this.nom;
+	return nom;
 } // ----- Fin de getNom
 
 Type Attribut::getType() {
-	return this.type;
+	return type;
 } // ----- Fin de getType
 
 
-//------------------------------------------------- Surcharge d'opérateurs
+//------------------------------------------------- Surcharge d'opï¿½rateurs
 
 
 
@@ -69,5 +68,5 @@ Attribut::~Attribut()
 
   //------------------------------------------------------------------ PRIVE
 
-  //----------------------------------------------------- Méthodes protégées
+  //----------------------------------------------------- Mï¿½thodes protï¿½gï¿½es
 

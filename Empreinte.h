@@ -1,7 +1,7 @@
 /*************************************************************************
 Empreinte  -  description
 -------------------
-début                : $DATE$
+dï¿½but                : $DATE$
 copyright            : (C) $YEAR$ par $AUTHOR$
 e-mail               : $EMAIL$
 *************************************************************************/
@@ -10,7 +10,7 @@ e-mail               : $EMAIL$
 #if ! defined ( EMPREINTE_H )
 #define EMPREINTE_H
 
-//--------------------------------------------------- Interfaces utilisées
+//--------------------------------------------------- Interfaces utilisï¿½es
 #include "Attribut.h"
 #include <list>
 
@@ -19,7 +19,7 @@ e-mail               : $EMAIL$
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <Empreinte>
+// Rï¿½le de la classe <Empreinte>
 //
 //
 //------------------------------------------------------------------------
@@ -29,15 +29,15 @@ class Empreinte
 	//----------------------------------------------------------------- PUBLIC
 
 public:
-	//----------------------------------------------------- Méthodes publiques
-	// type Méthode ( liste des paramètres );
+	//----------------------------------------------------- Mï¿½thodes publiques
+	// type Mï¿½thode ( liste des paramï¿½tres );
 	// Mode d'emploi :
 	//
 	// Contrat :
 	//
 
 
-	//------------------------------------------------- Surcharge d'opérateurs
+	//------------------------------------------------- Surcharge d'opï¿½rateurs
 	
 
 	//-------------------------------------------- Constructeurs - destructeur
@@ -46,6 +46,8 @@ public:
 	//
 	// Contrat :
 	//
+
+	Empreinte(list<Attribut> val);
 
 	Empreinte();
 	// Mode d'emploi :
@@ -62,13 +64,13 @@ public:
 	//------------------------------------------------------------------ PRIVE
 
 protected:
-	//----------------------------------------------------- Méthodes protégées
+	//----------------------------------------------------- Mï¿½thodes protï¿½gï¿½es
 
-	//----------------------------------------------------- Attributs protégés
+	//----------------------------------------------------- Attributs protï¿½gï¿½s
 	list<Attribut> valeur;
 };
 
-//-------------------------------- Autres définitions dépendantes de <Empreinte>
+//-------------------------------- Autres dï¿½finitions dï¿½pendantes de <Empreinte>
 
 #endif // EMPREINTE_H
 

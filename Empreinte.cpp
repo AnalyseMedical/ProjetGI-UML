@@ -1,19 +1,18 @@
 /*************************************************************************
 Empreinte  -  description
 -------------------
-début                : $DATE$
+dï¿½but                : $DATE$
 copyright            : (C) $YEAR$ par $AUTHOR$
 e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Réalisation de la classe <Empreinte> (fichier Empreinte.cpp) ------------
+//---------- Rï¿½alisation de la classe <Empreinte> (fichier Empreinte.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
-//-------------------------------------------------------- Include système
+//-------------------------------------------------------- Include systï¿½me
 using namespace std;
 #include <iostream>
-
 //------------------------------------------------------ Include personnel
 #include "Empreinte.h"
 
@@ -21,15 +20,15 @@ using namespace std;
 
 //----------------------------------------------------------------- PUBLIC
 
-//----------------------------------------------------- Méthodes publiques
-// type Empreinte::Méthode ( liste des paramètres )
+//----------------------------------------------------- Mï¿½thodes publiques
+// type Empreinte::Mï¿½thode ( liste des paramï¿½tres )
 // Algorithme :
 //
 //{
-//} //----- Fin de Méthode
+//} //----- Fin de Mï¿½thode
 
 
-//------------------------------------------------- Surcharge d'opérateurs
+//------------------------------------------------- Surcharge d'opï¿½rateurs
 
 
 //-------------------------------------------- Constructeurs - destructeur
@@ -42,12 +41,14 @@ Empreinte::Empreinte(const Empreinte & unEmpreinte)
 #endif
 } //----- Fin de Empreinte (constructeur de copie)
 
+Empreinte::Empreinte(){};
+
 
 Empreinte::Empreinte(list<Attribut> val)
 // Algorithme :
 //
 {
-	this.valeur = val;
+	valeur = val;
 #ifdef MAP
 	cout << "Appel au constructeur de <Empreinte>" << endl;
 #endif
@@ -66,5 +67,5 @@ Empreinte::~Empreinte()
 
   //------------------------------------------------------------------ PRIVE
 
-  //----------------------------------------------------- Méthodes protégées
+  //----------------------------------------------------- Mï¿½thodes protï¿½gï¿½es
 
