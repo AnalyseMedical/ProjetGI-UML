@@ -36,7 +36,12 @@ public:
 
 
 	//------------------------------------------------- Surcharge d'op�rateurs
-	
+
+	friend ostream & operator << (ostream & out, const Attribut & a);
+    // Mode d'emploi :
+    //   -
+    // Contrat :
+    //   -
 
 	//-------------------------------------------- Constructeurs - destructeur
 	Attribut(const Attribut & unAttribut);
@@ -69,6 +74,10 @@ protected:
 
 enum Type {LONG, BOOL, INT, DOUBLE, STRING };
 //-------------------------------- Autres d�finitions d�pendantes de <Attribut>
+
+inline ostream & operator << (ostream & out, const Attribut & a) {
+    cout << "(" << a.getNom << ";" << a.getType << ")" << flush;
+}
 
 #endif // ATTRIBUT_H
 

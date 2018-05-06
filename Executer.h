@@ -1,77 +1,93 @@
 /*************************************************************************
-                           Interface  -  description
+                           Executer  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <Interface> (fichier Interface.h) ----------------
-#if ! defined ( Interface_H )
-#define Interface_H
+//---------- Interface de la classe <Executer> (fichier Executer.h) ----------------
+#if ! defined ( Executer_H )
+#define Executer_H
 
 //--------------------------------------------------- Interfaces utilisées
-#include "Executer.h"
+using namespace std;
+#include <list>
+#include <string>
+#include <iostream>
+#include <map>
+#include "Resultat.h"
+#include "Empreinte.h"
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <Interface>
+// Rôle de la classe <Executer>
 //
 //
 //------------------------------------------------------------------------
 
-class Interface
+class Executer
 {
 //----------------------------------------------------------------- PUBLIC
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    void afficherOperation();
+
+    list<string> getMaladie();
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    void afficherMaladie();
+    map<Empreinte,Resultat> diagnostic(string nomFichier);
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    void demandeDiagnostic(string nomFichier);
+    list<Resultat> diagnostic(Empreinte e);
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
+    bool chargerDonnee(string nomFichier);
+    // type Méthode ( liste des paramètres );
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    bool chargerMetaDonnee(string nomFichier);
+    // type Méthode ( liste des paramètres );
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+    
 
 //------------------------------------------------- Surcharge d'opérateurs
-    Interface & operator = ( const Interface & unInterface );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    Interface ( const Interface & unInterface );
+    Executer ( const Executer & unExecuter );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    Interface ( );
+    Executer ( );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~Interface ( );
+    virtual ~Executer ( );
     // Mode d'emploi :
     //
     // Contrat :
@@ -83,10 +99,10 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-    Executer exe;
+
 };
 
-//-------------------------------- Autres définitions dépendantes de <Interface>
+//-------------------------------- Autres définitions dépendantes de <Executer>
 
-#endif // Interface_H
+#endif // Executer_H
 

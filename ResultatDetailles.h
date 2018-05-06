@@ -31,21 +31,19 @@ class ResultatDetailles : public Resultat
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
+    vector<Attribut> getAttributs ( ){
+        return Attributs;
+    }
     // Mode d'emploi :
     //
     // Contrat :
     //
-
-
 //------------------------------------------------- Surcharge d'opérateurs
-    ResultatDetailles & operator = ( const ResultatDetailles & unResultatDetailles );
+    friend ostream & operator << (ostream & out, const ResultatDetailles & r);
     // Mode d'emploi :
-    //
+    //   -
     // Contrat :
-    //
-
-
+    // 
 //-------------------------------------------- Constructeurs - destructeur
     ResultatDetailles ( const ResultatDetailles & unResultatDetailles );
     // Mode d'emploi (constructeur de copie) :
@@ -73,19 +71,6 @@ public:
     // Contrat :
     //
 
-    vector<Attribut> getAttributs ( ){
-        return Attributs;
-    }
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-    friend ostream & operator << (ostream & out, const ResultatDetailles & r);
-    // Mode d'emploi :
-    //   -
-    // Contrat :
-    // 
 
 //------------------------------------------------------------------ PRIVE
 

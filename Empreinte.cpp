@@ -21,6 +21,9 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- M�thodes publiques
+list<Attribut> Empreinte::getValeur(){
+	return valeur;
+}
 // type Empreinte::M�thode ( liste des param�tres )
 // Algorithme :
 //

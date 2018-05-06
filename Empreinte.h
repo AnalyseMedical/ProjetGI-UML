@@ -35,10 +35,16 @@ public:
 	//
 	// Contrat :
 	//
+	list<Attribut> getValeur();
 
 
 	//------------------------------------------------- Surcharge d'op�rateurs
-	
+
+	friend ostream & operator << (ostream & out, const Empreinte & e);
+    // Mode d'emploi :
+    //   -
+    // Contrat :
+    //   -
 
 	//-------------------------------------------- Constructeurs - destructeur
 	Empreinte(const Empreinte & unEmpreinte);
@@ -71,6 +77,13 @@ protected:
 };
 
 //-------------------------------- Autres d�finitions d�pendantes de <Empreinte>
+
+inline ostream & operator << (ostream & out, const Empreinte & e) {
+    for(list<Attribut>::iterator i = e.getValeur.begin(); i != e.getValeur.end();++i){
+        cout << *i << flush;
+    }
+	cout << endl;
+}
 
 #endif // EMPREINTE_H
 
