@@ -53,17 +53,39 @@ public:
     // Contrat :
     //
 
-    ResultatDetailles ( );
+    ResultatDetailles ( ){
+        maladie = "";
+        probabilite = 0;
+    }
     // Mode d'emploi :
     //
     // Contrat :
     //
+    ResultatDetailles(string uneMaladie, double uneStat, vector<Attribut> unVecteur){
+        maladie = uneMaladie;
+        probabilite = uneStat;
+        Attributs = unVecteur;
+    }
 
     virtual ~ResultatDetailles ( );
     // Mode d'emploi :
     //
     // Contrat :
     //
+
+    vector<Attribut> getAttributs ( ){
+        return Attributs;
+    }
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    friend ostream & operator << (ostream & out, const ResultatDetailles & r);
+    // Mode d'emploi :
+    //   -
+    // Contrat :
+    // 
 
 //------------------------------------------------------------------ PRIVE
 
@@ -75,6 +97,18 @@ protected:
 };
 
 //-------------------------------- Autres définitions dépendantes de <ResultatDetailles>
+inline ostream & operator << (ostream & out, const ResultatDetailles & r) {
+    string attributs = afficherVector(r.Attributs);
+    return out << r.maladie << ";" << r.probabilite <<";" << attributs << flush ;
+}
+
+static string afficherVector(vector<Attribut> v){
+    string res = "";
+    for(int unsigned i=0;i<v.size();i++){
+        res = res + ";" + "(" + v[i].getNom() + ")";
+    }
+    return res;
+}
 
 #endif // ResultatDetailles_H
 
