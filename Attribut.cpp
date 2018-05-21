@@ -1,16 +1,16 @@
 /*************************************************************************
 Attribut  -  description
 -------------------
-d�but                : $DATE$
+debut                : $DATE$
 copyright            : (C) $YEAR$ par $AUTHOR$
 e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- R�alisation de la classe <Attribut> (fichier Attribut.cpp) ----------
+//---------- Realisation de la classe <Attribut> (fichier Attribut.cpp) ----------
 
 //---------------------------------------------------------------- INCLUDE
 
-//-------------------------------------------------------- Include syst�me
+//-------------------------------------------------------- Include systeme
 using namespace std;
 #include <iostream>
 
@@ -20,18 +20,18 @@ using namespace std;
 //------------------------------------------------------------- Constantes
 //----------------------------------------------------------------- PUBLIC
 
-//----------------------------------------------------- M�thodes publiques
+//----------------------------------------------------- Methodes publiques
 
-string Attribut::getNom() {
+std::string Attribut::getNom() const {
 	return nom;
 } // ----- Fin de getNom
 
-Type Attribut::getType() {
+Type Attribut::getType() const {
 	return type;
 } // ----- Fin de getType
 
 
-//------------------------------------------------- Surcharge d'op�rateurs
+//------------------------------------------------- Surcharge d'operateurs
 
 
 
@@ -68,5 +68,5 @@ Attribut::~Attribut()
 
   //------------------------------------------------------------------ PRIVE
 
-  //----------------------------------------------------- M�thodes prot�g�es
+  //----------------------------------------------------- Methodes protegees
 

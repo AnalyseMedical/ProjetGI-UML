@@ -1,16 +1,16 @@
 /*************************************************************************
 Empreinte  -  description
 -------------------
-d�but                : $DATE$
+debut                : $DATE$
 copyright            : (C) $YEAR$ par $AUTHOR$
 e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- R�alisation de la classe <Empreinte> (fichier Empreinte.cpp) ------------
+//---------- Realisation de la classe <Empreinte> (fichier Empreinte.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
-//-------------------------------------------------------- Include syst�me
+//-------------------------------------------------------- Include systeme
 using namespace std;
 #include <iostream>
 //------------------------------------------------------ Include personnel
@@ -20,18 +20,18 @@ using namespace std;
 
 //----------------------------------------------------------------- PUBLIC
 
-//----------------------------------------------------- M�thodes publiques
-list<Attribut> Empreinte::getValeur(){
+//----------------------------------------------------- Methodes publiques
+list<Attribut> Empreinte::getValeur() const {
 	return valeur;
 }
-// type Empreinte::M�thode ( liste des param�tres )
+// type Empreinte::Methode ( liste des parametres )
 // Algorithme :
 //
 //{
-//} //----- Fin de M�thode
+//} //----- Fin de Methode
 
 
-//------------------------------------------------- Surcharge d'op�rateurs
+//------------------------------------------------- Surcharge d'operateurs
 
 
 //-------------------------------------------- Constructeurs - destructeur
@@ -70,5 +70,5 @@ Empreinte::~Empreinte()
 
   //------------------------------------------------------------------ PRIVE
 
-  //----------------------------------------------------- M�thodes prot�g�es
+  //----------------------------------------------------- Methodes protegees
 

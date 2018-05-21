@@ -1,7 +1,7 @@
 /*************************************************************************
 Empreinte  -  description
 -------------------
-d�but                : $DATE$
+debut                : $DATE$
 copyright            : (C) $YEAR$ par $AUTHOR$
 e-mail               : $EMAIL$
 *************************************************************************/
@@ -10,7 +10,7 @@ e-mail               : $EMAIL$
 #if ! defined ( EMPREINTE_H )
 #define EMPREINTE_H
 
-//--------------------------------------------------- Interfaces utilis�es
+//--------------------------------------------------- Interfaces utilisees
 #include "Attribut.h"
 #include <list>
 
@@ -19,7 +19,7 @@ e-mail               : $EMAIL$
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// R�le de la classe <Empreinte>
+// Rele de la classe <Empreinte>
 //
 //
 //------------------------------------------------------------------------
@@ -29,18 +29,18 @@ class Empreinte
 	//----------------------------------------------------------------- PUBLIC
 
 public:
-	//----------------------------------------------------- M�thodes publiques
-	// type M�thode ( liste des param�tres );
+	//----------------------------------------------------- Methodes publiques
+	// type Methode ( liste des parametres );
 	// Mode d'emploi :
 	//
 	// Contrat :
 	//
-	list<Attribut> getValeur();
+	list<Attribut> getValeur() const;
 
 
-	//------------------------------------------------- Surcharge d'op�rateurs
+	//------------------------------------------------- Surcharge d'operateurs
 
-	friend ostream & operator << (ostream & out, const Empreinte & e);
+	friend std::ostream & operator << (std::ostream & out, const Empreinte & e);
     // Mode d'emploi :
     //   -
     // Contrat :
@@ -70,19 +70,20 @@ public:
 	//------------------------------------------------------------------ PRIVE
 
 protected:
-	//----------------------------------------------------- M�thodes prot�g�es
+	//----------------------------------------------------- Methodes protegees
 
-	//----------------------------------------------------- Attributs prot�g�s
+	//----------------------------------------------------- Attributs proteges
 	list<Attribut> valeur;
 };
 
-//-------------------------------- Autres d�finitions d�pendantes de <Empreinte>
+//-------------------------------- Autres definitions dependantes de <Empreinte>
 
-inline ostream & operator << (ostream & out, const Empreinte & e) {
-    for(list<Attribut>::iterator i = e.getValeur.begin(); i != e.getValeur.end();++i){
-        cout << *i << flush;
+inline std::ostream & operator << (std::ostream & out, const Empreinte & e) {
+    for(list<Attribut>::iterator i = e.getValeur().begin(); i != e.getValeur().end();++i){
+        out << *i << flush;
     }
-	cout << endl;
+	out << endl;
+	return out;
 }
 
 #endif // EMPREINTE_H

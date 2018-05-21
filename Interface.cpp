@@ -33,7 +33,7 @@ void Interface::afficherOperation(){
 //} //----- Fin de Méthode
 
 void Interface::afficherMaladie(){
-    list<string> maladie= exe.getMaladie();
+    list<string> maladie = exe.getMaladie();
     for(list<string>::iterator i = maladie.begin(); i != maladie.end();++i){
         cout << *i << endl;
     }
@@ -58,22 +58,22 @@ void Interface::demandeDiagnostic(string nomFichier){
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-Interface & Interface::operator = ( const Interface & unInterface )
+/*Interface & Interface::operator = ( const Interface & unInterface )
 // Algorithme :
 //
 {
-} //----- Fin de operator =
+} //----- Fin de operator =*/
 
 
 //-------------------------------------------- Constructeurs - destructeur
-Interface::Interface ( const Interface & unInterface )
+/*Interface::Interface ( const Interface & unInterface )
 // Algorithme :
 //
 {
 #ifdef MAP
     cout << "Appel au constructeur de copie de <Interface>" << endl;
 #endif
-} //----- Fin de Interface (constructeur de copie)
+} //----- Fin de Interface (constructeur de copie)*/
 
 
 Interface::Interface ( )

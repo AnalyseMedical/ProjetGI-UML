@@ -51,7 +51,7 @@ public:
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-    Interface & operator = ( const Interface & unInterface );
+    //Interface & operator = ( const Interface & unInterface );
     // Mode d'emploi :
     //
     // Contrat :
@@ -59,7 +59,7 @@ public:
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    Interface ( const Interface & unInterface );
+    Interface ( const Interface & unInterface ) = default;
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :

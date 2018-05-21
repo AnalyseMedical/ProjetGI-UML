@@ -22,8 +22,9 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-    list<string> getMaladie(){
-
+    list<std::string> Executer::getMaladie() const {
+		list<std::string> result;
+		return result;
     }
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
@@ -31,36 +32,36 @@ using namespace std;
     // Contrat :
     //
 
-    map<Empreinte,Resultat> Executer::diagnostic(string nomFichier){
-
-    }
+    /*map<Empreinte,Resultat> Executer::diagnostic(string nomFichier){
+		return null;
+    }*/
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    list<Resultat> Executer::diagnostic(Empreinte e){
+    /*list<Resultat> Executer::diagnostic(Empreinte e){
 
-    }
+    }*/
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    bool Executer::chargerDonnee(string nomFichier){
+    /*bool Executer::chargerDonnee(string nomFichier){
 
-    }
+    }*/
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    bool Executer::chargerMetaDonnee(string nomFichier){
+    /*bool Executer::chargerMetaDonnee(string nomFichier){
 
-    }
+    }*/
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
     //
@@ -72,14 +73,14 @@ using namespace std;
 
 
 //-------------------------------------------- Constructeurs - destructeur
-Executer::Executer ( const Executer & unExecuter )
+/*Executer::Executer ( const Executer & unExecuter )
 // Algorithme :
 //
 {
 #ifdef MAP
     cout << "Appel au constructeur de copie de <Executer>" << endl;
 #endif
-} //----- Fin de Executer (constructeur de copie)
+} //----- Fin de Executer (constructeur de copie)*/
 
 
 Executer::Executer ( )

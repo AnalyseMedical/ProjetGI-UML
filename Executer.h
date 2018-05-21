@@ -35,7 +35,7 @@ class Executer
 public:
 //----------------------------------------------------- Méthodes publiques
 
-    list<string> getMaladie();
+    list<string> getMaladie() const;
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
     //
@@ -75,7 +75,7 @@ public:
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    Executer ( const Executer & unExecuter );
+    Executer ( const Executer & unExecuter ) = default;
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :

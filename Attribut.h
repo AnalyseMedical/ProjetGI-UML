@@ -1,7 +1,7 @@
 /*************************************************************************
 Attribut  -  description
 -------------------
-d�but                : $DATE$
+debut                : $DATE$
 copyright            : (C) $YEAR$ par $AUTHOR$
 e-mail               : $EMAIL$
 *************************************************************************/
@@ -10,14 +10,15 @@ e-mail               : $EMAIL$
 #if ! defined ( ATTRIBUT_H )
 #define ATTRIBUT_H
 
-//--------------------------------------------------- Interfaces utilis�es
+//--------------------------------------------------- Interfaces utilisees
 
 //------------------------------------------------------------- Constantes
+enum Type {LONG, BOOL, INT, DOUBLE, STRING };
 
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// R�le de la classe <Attribut>
+// Role de la classe <Attribut>
 //
 //
 //------------------------------------------------------------------------
@@ -27,17 +28,17 @@ class Attribut
 	//----------------------------------------------------------------- PUBLIC
 
 public:
-	//----------------------------------------------------- M�thodes publiques
-	string getNom();
-	/* Get du nom l'�l�ment Attribut */
+	//----------------------------------------------------- Methodes publiques
+	std::string getNom() const;
+	/* Get du nom l'element Attribut */
 
-	Type getType();
-	/*Get type de l'�l�ment Attribut*/
+	Type getType() const;
+	/*Get type de l'element Attribut*/
 
 
-	//------------------------------------------------- Surcharge d'op�rateurs
+	//------------------------------------------------- Surcharge d'operateurs
 
-	friend ostream & operator << (ostream & out, const Attribut & a);
+	friend std::ostream & operator << (std::ostream & out, const Attribut & a);
     // Mode d'emploi :
     //   -
     // Contrat :
@@ -65,18 +66,18 @@ public:
 	//------------------------------------------------------------------ PRIVE
 
 protected:
-	//----------------------------------------------------- M�thodes prot�g�es
+	//----------------------------------------------------- Methodes protegees
 
-	//----------------------------------------------------- Attributs prot�g�s
-	string nom;
+	//----------------------------------------------------- Attributs proteges
+	std::string nom;
 	Type type;
 };
 
-enum Type {LONG, BOOL, INT, DOUBLE, STRING };
-//-------------------------------- Autres d�finitions d�pendantes de <Attribut>
+//-------------------------------- Autres definitions dependantes de <Attribut>
 
-inline ostream & operator << (ostream & out, const Attribut & a) {
-    cout << "(" << a.getNom << ";" << a.getType << ")" << flush;
+inline std::ostream & operator << (std::ostream & out, const Attribut & a) {
+    out << "(" << a.getNom() << ";" << a.getType() << ")" << flush;
+    return out;
 }
 
 #endif // ATTRIBUT_H
