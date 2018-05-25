@@ -57,6 +57,13 @@ public:
 	// Contrat :
 	//
 
+	Attribut(string UnNom,Type UnType);
+	// Mode d'emploi :
+	//
+	// Contrat :
+	//
+
+
 	virtual ~Attribut();
 	// Mode d'emploi :
 	//
