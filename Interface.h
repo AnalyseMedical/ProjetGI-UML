@@ -1,9 +1,8 @@
 /*************************************************************************
                            Interface  -  description
                              -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+    début                : 25/05/2018
+    copyright            : (C) 2018 par clagadec
 *************************************************************************/
 
 //---------- Interface de la classe <Interface> (fichier Interface.h) ----------------
@@ -42,7 +41,7 @@ public:
     // Contrat :
     //
 
-    void demandeDiagnostic(string nomFichier);
+    void demandeDiagnostic(string nomFichier, string nomFichierMeta);
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
     //

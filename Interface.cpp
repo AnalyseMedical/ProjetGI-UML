@@ -1,9 +1,8 @@
 /*************************************************************************
                            Interface  -  description
                              -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+    début                : 25/05/2018
+    copyright            : (C) 2018 par clagadec
 *************************************************************************/
 
 //---------- Réalisation de la classe <Interface> (fichier Interface.cpp) ------------
@@ -39,17 +38,17 @@ void Interface::afficherOperation(){
 		cin >> operation;
 		
 		switch (operation) {
-			case 1 ::
+			case 1 :
 				cout << "Entrer le nom d'un fichier de métadonnées : " << endl;
 				cin >> nomFichierMeta;
 				cout << "Entrer le nom d'un fichier de données empreintes : " << endl;
 				cin >> nomFichierDonnees;
-				this.demandeDiagnostic(nomFichierDonnes, nomFichierMeta);
+				this->demandeDiagnostic(nomFichierDonnees, nomFichierMeta);
 				break;
-			case 2 ::
-				this.afficherMaladie();
+			case 2 :
+				this->afficherMaladie();
 				break;
-			case 0 ::
+			case 0 :
 				break;
 		}
 	}
@@ -68,10 +67,10 @@ void Interface::afficherMaladie(){
 } //----- Fin de afficherMaladie
 
 
-void Interface::demandeDiagnostic(string nomFichier){
+void Interface::demandeDiagnostic(string nomFichierDonnees, string nomFichierMeta){
 	// Algorithme :
 	
-    map<Empreinte,Resultat> resultat = exe.diagnostic(nomFichier);
+    map<Empreinte,Resultat> resultat = exe.diagnostic(nomFichierDonnees, nomFichierMeta);
     for(map<Empreinte,Resultat>::iterator i = resultat.begin(); i != resultat.end();++i){
         cout << i->first << ";" << i->second << endl;
     }
