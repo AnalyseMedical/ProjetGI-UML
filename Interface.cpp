@@ -24,37 +24,58 @@ using namespace std;
 
 //----------------------------------------------------- Méthodes publiques
 void Interface::afficherOperation(){
+	// Algorithme :
+	
+	int operation = -1;
+	std::string nomFichierDonnees;
+	std::string nomFichierMeta;
+	
+	while (operation!=0) {
+		cout << "Veuillez choisir l'opération à effectuer : " << endl;
+		cout << "1 : Demander un diagnostic " << endl;
+		cout << "2 : Afficher les maladies connues " << endl;
+		cout << "0 : Exit " << endl;
+		
+		cin >> operation;
+		
+		switch (operation) {
+			case 1 ::
+				cout << "Entrer le nom d'un fichier de métadonnées : " << endl;
+				cin >> nomFichierMeta;
+				cout << "Entrer le nom d'un fichier de données empreintes : " << endl;
+				cin >> nomFichierDonnees;
+				this.demandeDiagnostic(nomFichierDonnes, nomFichierMeta);
+				break;
+			case 2 ::
+				this.afficherMaladie();
+				break;
+			case 0 ::
+				break;
+		}
+	}
+				
+			
+} //----- Fin de afficherOperation
 
-}
-// type Interface::Méthode ( liste des paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
 
 void Interface::afficherMaladie(){
+	// Algorithme :
+	
     list<string> maladie = exe.getMaladie();
     for(list<string>::iterator i = maladie.begin(); i != maladie.end();++i){
         cout << *i << endl;
     }
-}
-// type Interface::Méthode ( liste des paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
+} //----- Fin de afficherMaladie
+
 
 void Interface::demandeDiagnostic(string nomFichier){
+	// Algorithme :
+	
     map<Empreinte,Resultat> resultat = exe.diagnostic(nomFichier);
     for(map<Empreinte,Resultat>::iterator i = resultat.begin(); i != resultat.end();++i){
         cout << i->first << ";" << i->second << endl;
     }
-}
-// type Interface::Méthode ( liste des paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
+} //----- Fin de demandeDiagnostic
 
 
 //------------------------------------------------- Surcharge d'opérateurs
