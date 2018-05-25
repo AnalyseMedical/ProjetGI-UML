@@ -15,10 +15,14 @@ using namespace std;
 #include "Attribut.h"
 #include <vector> 
 #include <string.h>
-#include<fstream>
+#include <fstream>
+#include <unordered_map>
+#include <list>
+#include "Empreinte.h"
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
+typedef unordered_map<string,list<Empreinte>> donnees;
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Lecteur>
@@ -44,6 +48,7 @@ public:
     //
     // Contrat :
     //
+    void chargerDonnes(string lecStr);
 
 //------------------------------------------------- Surcharge d'opérateurs
 
@@ -73,6 +78,7 @@ protected:
 
 //----------------------------------------------------- Attributs protégés
     vector<Attribut> Attributs;
+    donnees data;
 
 };
 
