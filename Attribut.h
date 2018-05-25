@@ -35,6 +35,13 @@ public:
 	Type getType() const;
 	/*Get type de l'element Attribut*/
 
+	string getValeur(){
+		return valeur;
+	}
+
+	void setValeur(string uneValeur){
+		valeur = uneValeur;
+	}
 
 	//------------------------------------------------- Surcharge d'operateurs
 
@@ -63,6 +70,12 @@ public:
 	// Contrat :
 	//
 
+	Attribut(string UnNom,Type UnType, string uneValueur);
+	// Mode d'emploi :
+	//
+	// Contrat :
+	//
+
 
 	virtual ~Attribut();
 	// Mode d'emploi :
@@ -78,6 +91,7 @@ protected:
 	//----------------------------------------------------- Attributs proteges
 	std::string nom;
 	Type type;
+	string valeur;
 };
 
 //-------------------------------- Autres definitions dependantes de <Attribut>

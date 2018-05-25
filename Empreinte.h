@@ -36,6 +36,8 @@ public:
 	// Contrat :
 	//
 	list<Attribut> getValeur() const;
+	string getMaladie() const;
+	void setMaladie(string uneMaladie);
 
 
 	//------------------------------------------------- Surcharge d'operateurs
@@ -53,7 +55,7 @@ public:
 	// Contrat :
 	//
 
-	Empreinte(list<Attribut> val);
+	Empreinte(list<Attribut> val, string UneMaladie );
 
 	Empreinte();
 	// Mode d'emploi :
@@ -74,6 +76,7 @@ protected:
 
 	//----------------------------------------------------- Attributs proteges
 	list<Attribut> valeur;
+	string maladie;
 };
 
 //-------------------------------- Autres definitions dependantes de <Empreinte>

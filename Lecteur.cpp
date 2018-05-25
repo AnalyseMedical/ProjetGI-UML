@@ -16,6 +16,7 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Lecteur.h"
+#include <sstream>
 
 //------------------------------------------------------------- Constantes
 const char POINTVIRGULE = ';';
@@ -47,7 +48,7 @@ void Lecteur::chargerMetaDonnee(string lectStr)
 }
 
 //lit le fichier de donn�e :
-void Lecteur::lireFichierDonnee(string lectStr)
+void Lecteur::chargerDonnees(string lectStr)
 {
     ifstream fichierA;
     fichierA.open(lectStr);
@@ -68,36 +69,37 @@ void Lecteur::lireFichierDonnee(string lectStr)
         {
             int j = 0;
             string line = "";
-            string tmp = "";
+            string value = "";
+            string maladie="";
+            string tmp ="";
             getline(fichierA,line);
             istringstream iss2(line);
-            empreinte e;
+            Empreinte e;
             while(!iss2.eof() && j < (donnee.size()-1))
             {
-                getline(iss2,tmp,POINTVIRGULE);
-                Attribut a = Attributs[j];
-                Attribut a = Attribut(tmp,Attributs->find(donnee[j])->second);
+                getline(iss2,value,POINTVIRGULE);
+                Attribut a = Attribut(donnee[j],Attributs[j].getType(),value);
                 j++;
-                e.at.push_back(a);
+                e.getValeur().push_back(a);
             }
-            getline(iss2,tmp,SAUTDELIGNE);
-            e.maladie = tmp;
+            getline(iss2,maladie,SAUTDELIGNE);
+            e.setMaladie(maladie);
             getline(iss2,tmp);
             
-            if(maMapEmpreinte->find(e.maladie) == maMapEmpreinte->end())
+            if(data.find(e.getMaladie()) == data.end())
             {
-                list<empreinte> listeE;
+                list<Empreinte> listeE;
                 listeE.push_back(e);
-                maMapEmpreinte->insert(pair<string,list<empreinte>>(e.maladie,listeE));
+                data.insert(pair<string,list<Empreinte>>(e.getMaladie(),listeE));
             } else
             {
-                maMapEmpreinte->find(e.maladie)->second.push_back(e);
+                data.find(e.getMaladie())->second.push_back(e);
             }
         }
-        return donnee;
+        //return donnee;
     } else {
         cout << " pas de fichier " << endl;
-        return vector<string>();
+        //return vector<string>();
     }
 }
 // type Lecteur::Méthode ( liste des paramètres )

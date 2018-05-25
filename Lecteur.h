@@ -48,7 +48,7 @@ public:
     //
     // Contrat :
     //
-    void chargerDonnes(string lecStr);
+    void chargerDonnees(string lecStr);
 
 //------------------------------------------------- Surcharge d'opérateurs
 

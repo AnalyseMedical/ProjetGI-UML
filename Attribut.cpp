@@ -60,6 +60,14 @@ Attribut::Attribut()
 Attribut::Attribut(string UnNom,Type UnType){
 	nom = UnNom;
 	type = UnType;
+	valeur = "";
+}
+
+Attribut::Attribut(string UnNom,Type UnType, string uneValeur){
+	nom = UnNom;
+	type = UnType;
+	valeur = uneValeur;
+
 }
 
 
