@@ -40,6 +40,8 @@ Attribut::Attribut(const Attribut & unAttribut)
 // Algorithme :
 //
 {
+	nom = unAttribut.getNom();
+	type = unAttribut.getType();
 #ifdef MAP
 	cout << "Appel au constructeur de copie de <Attribut>" << endl;
 #endif
@@ -54,6 +56,11 @@ Attribut::Attribut()
 	cout << "Appel au constructeur de <Attribut>" << endl;
 #endif
 } //----- Fin de Attribut
+
+Attribut::Attribut(string UnNom,Type UnType){
+	nom = UnNom;
+	type = UnType;
+}
 
 
 Attribut::~Attribut()
