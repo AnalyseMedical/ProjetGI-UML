@@ -11,6 +11,8 @@ e-mail               : $EMAIL$
 #define ATTRIBUT_H
 
 //--------------------------------------------------- Interfaces utilisees
+using namespace std;
+#include <string>
 
 //------------------------------------------------------------- Constantes
 enum Type {LONG, BOOL, INT, DOUBLE, STRING };
@@ -29,7 +31,7 @@ class Attribut
 
 public:
 	//----------------------------------------------------- Methodes publiques
-	std::string getNom() const;
+	string getNom() const;
 	/* Get du nom l'element Attribut */
 
 	Type getType() const;
@@ -45,7 +47,7 @@ public:
 
 	//------------------------------------------------- Surcharge d'operateurs
 
-	friend std::ostream & operator << (std::ostream & out, const Attribut & a);
+	friend ostream & operator << (ostream & out, const Attribut & a);
     // Mode d'emploi :
     //   -
     // Contrat :
@@ -89,7 +91,7 @@ protected:
 	//----------------------------------------------------- Methodes protegees
 
 	//----------------------------------------------------- Attributs proteges
-	std::string nom;
+	string nom;
 	Type type;
 	string valeur;
 };

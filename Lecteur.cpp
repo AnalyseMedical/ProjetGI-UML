@@ -98,7 +98,7 @@ void Lecteur::chargerDonnees(string lectStr)
         }
         //return donnee;
     } else {
-        cout << " pas de fichier " << endl;
+        cout << " Pas de fichier " << endl;
         //return vector<string>();
     }
 }

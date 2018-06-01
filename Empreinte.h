@@ -13,6 +13,7 @@ e-mail               : $EMAIL$
 //--------------------------------------------------- Interfaces utilisees
 #include "Attribut.h"
 #include <list>
+#include <string>
 
 //------------------------------------------------------------- Constantes
 
