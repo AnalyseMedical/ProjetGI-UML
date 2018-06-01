@@ -47,6 +47,8 @@ Empreinte::Empreinte(const Empreinte & unEmpreinte)
 // Algorithme :
 //
 {
+	valeur = unEmpreinte.getValeur();
+	maladie = unEmpreinte.getMaladie();
 #ifdef MAP
 	cout << "Appel au constructeur de copie de <Empreinte>" << endl;
 #endif

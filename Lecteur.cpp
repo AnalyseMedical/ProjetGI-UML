@@ -108,11 +108,31 @@ void Lecteur::chargerDonnees(string lectStr)
 //{
 //} //----- Fin de Méthode
 
-void Lecteur::display()
+void Lecteur::displayAttributs()
 {
     for(int i =0;i<Attributs.size();i++)
     {
         cout << Attributs[i] << endl;
+    }
+}
+
+void Lecteur::displayData()
+{
+    donnees::iterator it;
+    for(it = data.begin(); it != data.end(); it++)
+    {
+        cout << it->first << " et " << flush;
+        displayList(it->second);
+        cout << endl;
+
+    }
+}
+
+void Lecteur::displayList(list<Empreinte> l){
+    list<Empreinte>::iterator it;
+    for(it = l.begin(); it != l.end(); it++)
+    {
+        cout << "valeur empreinte : " << *it << endl;
     }
 }
 
