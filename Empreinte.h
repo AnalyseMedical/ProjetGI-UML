@@ -49,6 +49,7 @@ public:
     //   -
 
 	//-------------------------------------------- Constructeurs - destructeur
+
 	Empreinte(const Empreinte & unEmpreinte);
 	// Mode d'emploi (constructeur de copie) :
 	//
@@ -83,9 +84,9 @@ protected:
 
 inline std::ostream & operator << (std::ostream & out, const Empreinte & e) {
     for(list<Attribut>::iterator i = e.getValeur().begin(); i != e.getValeur().end();++i){
-        out << *i << flush;
+        out << *i << ";" << flush;
     }
-	out << endl;
+	out << e.getMaladie() << endl;
 	return out;
 }
 

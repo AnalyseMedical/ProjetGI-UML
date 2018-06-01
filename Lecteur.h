@@ -42,7 +42,11 @@ public:
     //
     // Contrat :
     //
-    void display();
+    void displayData();
+
+    void displayAttributs();
+
+    void displayList(list<Empreinte> l);
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
     //
