@@ -32,36 +32,42 @@ using namespace std;
     // Contrat :
     //
 
-    /*map<Empreinte,Resultat> Executer::diagnostic(string nomFichier){
-		return null;
-    }*/
+    map<Empreinte,Resultat> Executer::diagnostic(string nomFichier, string nomFichierMeta){
+		cout << "diagnostic" << endl;
+		map<Empreinte,Resultat> diagn;
+		return diagn;
+    }
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    /*list<Resultat> Executer::diagnostic(Empreinte e){
-
-    }*/
+    list<Resultat> Executer::diagnostic(Empreinte e){
+		cout << "diagnostic" << endl;
+		list<Resultat> diagn;
+		return diagn;
+    }
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    /*bool Executer::chargerDonnee(string nomFichier){
-
-    }*/
+    bool Executer::chargerDonnee(string nomFichier){
+		cout << "chargerDonnee" << endl;
+		return true;
+    }
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    /*bool Executer::chargerMetaDonnee(string nomFichier){
-
-    }*/
+    bool Executer::chargerMetaDonnee(string nomFichier){
+		cout << "chargerMetaDonnee" << endl;
+		return true;
+    }
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
     //

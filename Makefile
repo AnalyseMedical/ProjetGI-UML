@@ -6,7 +6,7 @@ RM=rm
 ECHO=echo
 
 #Options
-CXXFLAGS=-std=c++11 -g -W -Wall -Wextra -pedantic -O2
+CXXFLAGS=-std=c++11
 LDFLAGS=
 RMFLAGS=-rf
 
@@ -40,5 +40,5 @@ $(CLEAN):
 Empreinte.o: Attribut.h
 Metadonnees.o: Attribut.h
 ResultatDetailles.o: Resultat.h Attribut.h
-Executer.o: Resultat.h Empreinte.h
-Interface.o: Executer.h
+Executer.o: Resultat.h Empreinte.h Attribut.h
+Interface.o: Executer.h Resultat.h Empreinte.h Attribut.h

@@ -58,7 +58,7 @@ public:
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    Interface ( const Interface & unInterface ) = default;
+    Interface ( const Interface & unInterface );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :

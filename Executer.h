@@ -42,7 +42,7 @@ public:
     // Contrat :
     //
 
-    map<Empreinte,Resultat> diagnostic(string nomFichier);
+    map<Empreinte,Resultat> diagnostic(string nomFichier, string nomFichierMeta);
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
     //
