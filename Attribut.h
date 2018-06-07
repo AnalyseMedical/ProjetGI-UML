@@ -108,7 +108,8 @@ protected:
 //-------------------------------- Autres definitions dependantes de <Attribut>
 
 inline std::ostream & operator << (std::ostream & out, const Attribut & a) {
-    out << "(" << a.getNom() << ";" << a.getType() << "; valeur : " << a.getValeur() << ")" << flush;
+    out << a.getValeur() << ";";
+    //out << "(" << a.getNom() << ";" << a.getType() << "; valeur : " << a.getValeur() << ")" << flush;
     return out;
 }
 

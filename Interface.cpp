@@ -85,12 +85,12 @@ void Interface::afficherMaladie(Lecteur &l){
 
 void Interface::demandeDiagnostic(string nomFichierEmpreinte,Lecteur &l){
 	// Algorithme :
-    l.diagnostic(nomFichierEmpreinte);
-    /*unordered_map<Empreinte,Resultat> resultat = */
-    //l.diagnostic(nomFichierEmpreinte);
-    /*for(unordered_map<Empreinte,Resultat>::iterator i = resultat.begin(); i != resultat.end();++i){
-        cout << i->first << ";" << i->second << endl;
-    }*/
+    vector<pair<Empreinte, Resultat>> resultat = l.diagnostic(nomFichierEmpreinte);
+    ofstream sortie("resultat.txt");
+    int size = resultat.size();
+    for(int i = 0; i < size; ++i){
+        sortie << resultat[i].first << resultat[i].second << endl;
+    }
 } //----- Fin de demandeDiagnostic
 
 

@@ -44,12 +44,13 @@ public:
     //
     // Contrat :
     //
-    void displayData();
+    int displayData();
+
     donnees getData() const{
         return data;
     }
 
-    void displayAttributs() const;
+    int displayAttributs() const;
 
     void displayVector(vector<Empreinte> l) const;
     // type Méthode ( liste des paramètres );
@@ -57,7 +58,7 @@ public:
     //
     // Contrat :
     //
-    void chargerDonnees(string lecStr, bool aAnalyser);
+    int chargerDonnees(string lecStr, bool aAnalyser);
     
     void calculMoyenne();
     
