@@ -62,68 +62,77 @@ int Lecteur::chargerMetaDonnee(string lectStr)
 }
 
 //lit le fichier de donn�e :
-void Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
+int Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
 {
     ifstream fichierA;
     fichierA.open(lectStr);
-    if(fichierA){
-        string line = "";
-        string value = "";
-        string maladie="";
-        string tmp ="";
-        if(aAnalyser == false){
-            string firstLine = "";
-            getline(fichierA,firstLine);
-            //Code pour lire les empreintes :
-            while(!fichierA.eof())
-            {
-                int j = 0;
-                getline(fichierA,line);
-                istringstream iss2(line);
-                Empreinte e;
-                while(!iss2.eof() && j < (attributs.size()))
+    try {
+        if(fichierA){
+            string line = "";
+            string value = "";
+            string maladie="";
+            string tmp ="";
+            if(aAnalyser == false){
+                string firstLine = "";
+                getline(fichierA,firstLine);
+                //Code pour lire les empreintes :
+                while(!fichierA.eof())
                 {
-                    getline(iss2,value,POINTVIRGULE);
-                    Attribut a = Attribut(attributs[j].getNom(),attributs[j].getType(),value);
-                    j++;
-                    e.addValeur(a);
+                    int j = 0;
+                    getline(fichierA,line);
+                    istringstream iss2(line);
+                    Empreinte e;
+                    while(!iss2.eof() && j < (attributs.size()))
+                    {
+                        getline(iss2,value,POINTVIRGULE);
+                        Attribut a = Attribut(attributs[j].getNom(),attributs[j].getType(),value);
+                        j++;
+                        e.addValeur(a);
+                    }
+                    getline(iss2,maladie,SAUTDELIGNE);
+                    e.setMaladie(maladie);
+                    getline(iss2,tmp);
+                    if(data.find(e.getMaladie()) == data.end())
+                    {
+                        vector<Empreinte> vectorE;
+                        vectorE.push_back(e);
+                        data.insert(pair<string,vector<Empreinte>>(e.getMaladie(),vectorE));
+                    } else
+                    {
+                        data.find(e.getMaladie())->second.push_back(e);
+                    }
                 }
-                getline(iss2,maladie,SAUTDELIGNE);
-                e.setMaladie(maladie);
-                getline(iss2,tmp);
-                if(data.find(e.getMaladie()) == data.end())
+                calculMoyenne();           
+            } else if (aAnalyser == true){
+                while(!fichierA.eof())
                 {
-                    vector<Empreinte> vectorE;
-                    vectorE.push_back(e);
-                    data.insert(pair<string,vector<Empreinte>>(e.getMaladie(),vectorE));
-                } else
-                {
-                    data.find(e.getMaladie())->second.push_back(e);
+                    int j = 0;
+                    getline(fichierA,line);
+                    istringstream iss2(line);
+                    Empreinte e;
+                    while(!iss2.eof() && j < (attributs.size()))
+                    {
+                        getline(iss2,value,POINTVIRGULE);
+                        Attribut a = Attribut(attributs[j].getNom(),attributs[j].getType(),value);
+                        j++;
+                        e.addValeur(a);
+                    }
+                    emp_aAnalyser.push_back(e);
+                    //displayEmpreinte();
                 }
             }
-            calculMoyenne();           
-        } else if (aAnalyser == true){
-            while(!fichierA.eof())
-            {
-                int j = 0;
-                getline(fichierA,line);
-                istringstream iss2(line);
-                Empreinte e;
-                while(!iss2.eof() && j < (attributs.size()))
-                {
-                    getline(iss2,value,POINTVIRGULE);
-                    Attribut a = Attribut(attributs[j].getNom(),attributs[j].getType(),value);
-                    j++;
-                    e.addValeur(a);
-                }
-                emp_aAnalyser.push_back(e);
-                //displayEmpreinte();
-            }
+            cout << "Fichier de données chargé" << endl;
+            return 0;
+            //return donnee;
+        } else {
+            cout << " Aucun fichier " << endl;
+            return -1;
         }
-        //return donnee;
-    } else {
-        cout << " Pas de fichier " << endl;
+    } catch (exception e) {
+        cout << "Erreur lors de la lecture" << endl;
+        return -1;
     }
+    
 }
 
 void Lecteur::calculMoyenne(){
@@ -188,20 +197,25 @@ void Lecteur::calculMoyenne(){
 //{
 //} //----- Fin de Méthode
 
-void Lecteur::displayAttributs() const
+int Lecteur::displayAttributs() const
 {
-    if(attributs.size() == 0)
-        cout << "metaDonnee abscente" << endl;
+    if(attributs.size() == 0) {
+        cout << "MetaDonnee abscente" << endl;
+        return 5;
+    }
     for(int i =0;i<attributs.size();i++)
     {
         cout << attributs[i] << endl;
     }
+    return 0;
 }
 
-void Lecteur::displayData() 
+int Lecteur::displayData() 
 {
-    if(data.begin() == data.end())
-        cout << "donnee abscente" << endl;
+    if(data.begin() == data.end()) {
+        cout << "Donnee abscente" << endl;
+        return 5;
+    }
     donnees::iterator it;
     for(it = data.begin(); it != data.end(); it++)
     {
@@ -210,6 +224,7 @@ void Lecteur::displayData()
         cout << endl;
 
     }
+    return 0;
 }
 
 void Lecteur::displayVector(vector<Empreinte> l) const{
