@@ -38,7 +38,11 @@ public:
 	//
 	vector<Attribut> getValeur() const;
     void addValeur(Attribut a);
+    
+    
 	string getMaladie() const;
+	
+	
 	void setMaladie(string uneMaladie);
 	void setValeur(vector<Attribut> unVector);
 
