@@ -121,7 +121,11 @@ int Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
                     //displayEmpreinte();
                 }
             }
-            cout << "Fichier de données chargé" << endl;
+            if (aAnalyser) {
+                cout << "Fichier de données empreintes à analyser chargé" << endl;
+            } else {
+                cout << "Fichier de données maladies chargé" << endl;
+            }
             return 0;
             //return donnee;
         } else {

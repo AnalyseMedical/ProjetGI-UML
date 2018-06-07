@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Lecteur.h"
+#include "Interface.h"
 
 //Lecture fichier métadonnées
 
@@ -109,8 +110,15 @@ int TU32 () {
 
 //Production fichier résultat
 
-int main TU41() {
+int TU41() {
     cout << "Test41:Lancer la production d'un fichier résultat lorsqu'aucune donnée n'a été chargée" << endl;
+    Lecteur lecteur = Lecteur();
+    lecteur.diagnostic("Test41.txt");
+    return 0;
+}
+
+int TU42() {
+    cout << "Test42:Production d'un fichier résultat après chargement d'une empreinte conforme mais sans fichier maladie" << endl;
     return 0;
 }
 
@@ -134,5 +142,7 @@ int main () {
 
     cout << TU31() << endl;
     cout << TU32() << endl;
+
+    cout << TU41() << endl;
     return 0;
 }
