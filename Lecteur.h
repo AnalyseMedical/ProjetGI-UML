@@ -38,7 +38,7 @@ class Lecteur
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    int chargerMetaDonnee(string lecStr);
+    void chargerMetaDonnee(string lecStr);
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
     //
