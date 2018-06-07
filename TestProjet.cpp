@@ -81,7 +81,7 @@ int TU22 () {
 }
 
 int TU23 () {
-    cout << "Test23: Lecture d'un fichier avec des informations non conformes" << endl;
+    cout << "Test23: Lecture d'un fichier qui n'existe pas" << endl;
     Lecteur lecteur = Lecteur ();
     lecteur.chargerMetaDonnee("HealthMeasurementDescription.txt");
     return lecteur.chargerDonnees("Test23.txt", false);
