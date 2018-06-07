@@ -18,7 +18,7 @@ using namespace std;
 #include "Lecteur.h"
 #include <stdlib.h>
 #include <sstream>
-#include <math.h>
+#include <cmath>
 
 //------------------------------------------------------------- Constantes
 const char POINTVIRGULE = ';';
@@ -238,6 +238,7 @@ Resultat Lecteur::chercherMaladie(Empreinte e){
     int size = moyenne.size();
     for (int i = 0; i < size; ++i)
     {
+        cout << size << endl;
         if(moyenne[i].getMaladie() !=""){
             Empreinte temoin = moyenne[i];
             double tmp = testMaladie(temoin,e);
@@ -260,8 +261,9 @@ double Lecteur::testMaladie(Empreinte temoin,Empreinte e){
     for(int i = 0; i < size; ++i)
     {
         if(temoin.getValeur().at(i).getType() == DOUBLE){
-            long moyenne = stol(temoin.getValeur().at(i).getValeur());
-            distance += abs(stol(e.getValeur().at(i).getValeur())-moyenne)*abs(stol(e.getValeur().at(i).getValeur())-moyenne);
+            cout << temoin.getValeur().at(i).getValeur() << endl;
+            double moyenne = stod(temoin.getValeur().at(i).getValeur());
+            distance += abs(stod(e.getValeur().at(i).getValeur())-moyenne)*abs(stod(e.getValeur().at(i).getValeur())-moyenne);
         }
     }
     double proba = 0;
