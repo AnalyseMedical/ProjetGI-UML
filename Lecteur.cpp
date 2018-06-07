@@ -227,6 +227,7 @@ vector<pair<Empreinte,Resultat>> Lecteur::diagnostic(string nomFichierEmpreinte)
     chargerDonnees(nomFichierEmpreinte,true);
     int size = emp_aAnalyser.size();
     for(int i = 0; i < size; ++i){
+        Resultat r = chercherMaladie(emp_aAnalyser[i]);
         pair<Empreinte,Resultat> pairAajouter(emp_aAnalyser[i],r);
         res.push_back(pairAajouter);
     }
