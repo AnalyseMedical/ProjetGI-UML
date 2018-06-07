@@ -94,6 +94,24 @@ int Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
                     }
                     getline(iss2,maladie,SAUTDELIGNE);
                     e.setMaladie(maladie);
+                    
+                    //-------- code ajouté
+                    for (const Attribut & a : e.getValeur())
+                    {
+                        if (a.getType() == STRING)
+                        {
+                            if (maladieStrings[maladie][a.getNom()].find(a.getValeur()) == maladieStrings[maladie][a.getNom()].end())
+                            {
+                                maladieStrings[maladie][a.getNom()][a.getValeur()] = 0;
+                            }
+                            else
+                            {
+                                maladieStrings[maladie][a.getNom()][a.getValeur()] += 1;
+                            }
+                        }
+                    }
+                    //-------------------
+                    
                     getline(iss2,tmp);
                     if(data.find(e.getMaladie()) == data.end())
                     {
@@ -105,37 +123,45 @@ int Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
                         data.find(e.getMaladie())->second.push_back(e);
                     }
                 }
-                calculMoyenne();           
-            } else if (aAnalyser == true){
-                while(!fichierA.eof())
+            calculMoyenne();           
+        } else if (aAnalyser == true){
+            while(!fichierA.eof())
+            {
+                int j = 0;
+                getline(fichierA,line);
+                istringstream iss2(line);
+                Empreinte e;
+                while(!iss2.eof() && j < (attributs.size()-1))
                 {
-                    int j = 0;
-                    getline(fichierA,line);
-                    istringstream iss2(line);
-                    Empreinte e;
-                    while(!iss2.eof() && j < (attributs.size()))
-                    {
-                        getline(iss2,value,POINTVIRGULE);
-                        Attribut a = Attribut(attributs[j].getNom(),attributs[j].getType(),value);
-                        j++;
-                        e.addValeur(a);
-                    }
-                    emp_aAnalyser.push_back(e);
-                    //displayEmpreinte();
+                    getline(iss2,value,POINTVIRGULE);
+                    Attribut a = Attribut(attributs[j].getNom(),attributs[j].getType(),value);
+                    j++;
+                    e.addValeur(a);
                 }
+                getline(iss2,value,SAUTDELIGNE);
+                Attribut a = Attribut(attributs[j].getNom(),attributs[j].getType(),value);
+                j++;
+                e.addValeur(a);
+                emp_aAnalyser.push_back(e);
+                //displayEmpreinte();
             }
-            cout << "Fichier de données chargé" << endl;
+            if (aAnalyser) {
+                cout << "Fichier de données empreintes à analyser chargé" << endl;
+            } else {
+                cout << "Fichier de données maladies chargé" << endl;
+            }
             return 0;
             //return donnee;
-        } else {
-            cout << " Aucun fichier " << endl;
-            return -1;
         }
+    } else {
+        cout << " Aucun fichier " << endl;
+        return -1;
+    }
     } catch (exception e) {
         cout << "Erreur lors de la lecture" << endl;
         return -1;
     }
-    
+    return 0;
 }
 
 void Lecteur::calculMoyenne(){
@@ -150,6 +176,26 @@ void Lecteur::calculMoyenne(){
         int tmp = 0;
         vector<Attribut> vectorA = itD->second.begin()->getValeur();
         copy(vectorA.begin()+1,vectorA.end(),vectAt.begin());
+        
+        size_t taille = vectorA.size();
+        for (int i = 0; i < taille; ++i)
+        {
+            if (vectAt[i].getType() == STRING)
+            {
+                string meilleurString;
+                int maxOccur = 0;
+                for (const auto & stringEtOccurence : maladieStrings[itD->first][vectAt[i].getNom()])
+                {
+                    if (maxOccur < stringEtOccurence.second)
+                    {
+                        maxOccur = stringEtOccurence.second;
+                        meilleurString = stringEtOccurence.first;
+                    }
+                }
+                vectAt[i].setValeur(meilleurString);
+            }
+        }
+        
         for (itE = ++(itD->second.begin()); itE != itD->second.end(); itE++)
         {
             int i = 0;
@@ -163,7 +209,7 @@ void Lecteur::calculMoyenne(){
                 } else
                 {
                     vectAt[i].setNom(a.getNom());
-                    vectAt[i++].setValeur(a.getValeur());
+                    i++;
                 }
             }
             nb++;
@@ -190,7 +236,7 @@ void Lecteur::calculMoyenne(){
     
      // affichage de la moyenne
     for(int i = 0; i < moyenne.size(); i++){
-            cout << moyenne[i] << " ";
+        cout << "moyenne : " << moyenne[i] << " ";
         }
 }
 
@@ -277,14 +323,21 @@ Resultat Lecteur::chercherMaladie(Empreinte e){
 
 
 double Lecteur::testMaladie(Empreinte temoin,Empreinte e){
-    int size = e.getValeur().size();
+    vector<Attribut> tmp = e.getValeur();
+    std::vector<Attribut> vectEmpreinte(++(tmp.begin()), tmp.end());
+    int size = vectEmpreinte.size();
     double distance = 0;
+    cout << " lol " << size << endl;
     for(int i = 0; i < size; ++i)
     {
+        cout << "[" << temoin.getValeur().at(i) << "] - ";
         if(temoin.getValeur().at(i).getType() == DOUBLE){
             cout << temoin.getValeur().at(i).getValeur() << endl;
             double moyenne = stod(temoin.getValeur().at(i).getValeur());
-            distance += abs(stod(e.getValeur().at(i).getValeur())-moyenne)*abs(stod(e.getValeur().at(i).getValeur())-moyenne);
+            cout << "--> " << vectEmpreinte.at(i) << endl;
+            distance += abs(stod(vectEmpreinte.at(i).getValeur())-moyenne)*abs(stod(vectEmpreinte.at(i).getValeur())-moyenne);
+        } else {
+            cout << "c'est un string" << endl;
         }
     }
     double proba = 0;

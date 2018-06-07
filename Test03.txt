@@ -1,7 +1,0 @@
-AttributeName;AttributeType
-NoID;ID
-A1;string
-A2;voiture
-A3;voiture
-A4;double
-AZ51;double
