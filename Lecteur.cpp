@@ -38,31 +38,32 @@ void Lecteur::displayEmpreinte(){
 
 int Lecteur::chargerMetaDonnee(string lectStr)
 {
-    ifstream fichier;
-    fichier.open(lectStr);
-    string key = "";
-    string value = "";
-    if(fichier){
-        getline(fichier,key,POINTVIRGULE);
-        if(key==""){
-            cerr << "Fichier vide" << endl;
-            return 2;
+        ifstream fichier;
+        fichier.open(lectStr);
+        string key = "";
+        string value = "";
+        if(fichier){
+            getline(fichier,key,POINTVIRGULE);
+            if(key==""){
+                cerr << "Fichier vide" << endl;
+                return 2;
+            }
+            getline(fichier,value);
+            while(!fichier.eof()){
+                getline(fichier,key,POINTVIRGULE);
+                getline(fichier,value,SAUTDELIGNE);
+                Type t = StringToType(value);
+                Attribut attribut = Attribut(key,t);
+                attributs.push_back(attribut);
+                getline(fichier,value);
+            }
+            cout << "Fichier chargé" << endl;
+            return 0;
+        } else{
+            cerr << "Aucun fichier" << endl;
+            return -1;
         }
-        getline(fichier,value);
-        while(!fichier.eof()){
-			getline(fichier,key,POINTVIRGULE);
-			getline(fichier,value,SAUTDELIGNE);
-			Type t = StringToType(value);
-			Attribut attribut = Attribut(key,t);
-			attributs.push_back(attribut);
-			getline(fichier,value);
-        }
-        cout << "Fichier chargé" << endl;
-        return 0;
-    } else{
-        cerr << "Aucun fichier" << endl;
-        return -1;
-    }
+    
 }
 
 //lit le fichier de donnee :
@@ -77,8 +78,7 @@ int Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
             string maladie="";
             string tmp ="";
             if(aAnalyser == false){
-                string firstLine = "";
-                cout << "Et là ?" << endl;                
+                string firstLine = "";               
                 getline(fichierA,firstLine);
                 //Code pour lire les empreintes :
                 bool fichierEstVide=true;
@@ -128,7 +128,7 @@ int Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
                 }
                 if(fichierEstVide){
                     cerr<<"Fichier vide"<<endl;
-                    return 2;
+                    return 3;
                 }
                 calculMoyenne();
             } else if (aAnalyser == true){
@@ -153,7 +153,7 @@ int Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
                 }
                 if(fichierEstVide){
                     cerr<<"Fichier vide"<<endl;
-                    return 2;
+                    return 3;
                 }
             calculMoyenne();
         } else if (aAnalyser == true){
@@ -185,16 +185,16 @@ int Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
             return 0;
         } else {
             cerr << " Aucun fichier " << endl;
-            return -1;
+            return 2;
             //return donnee;
         }
-    } else {
-        cout << " Aucun fichier " << endl;
-        return -1;
-    }
+        } else {
+            cerr << " Aucun fichier le dernier " << endl;
+            return 2;
+        }
     } catch (exception e) {
         cerr << "Erreur lors de la lecture" << endl;
-        return -1;
+        return 1;
     }
     return 0;
 }
@@ -269,10 +269,6 @@ void Lecteur::calculMoyenne(){
         moyenne.push_back(e);
     }
 
-     // affichage de la moyenne
-    for(int i = 0; i < moyenne.size(); i++){
-        cout << "moyenne : " << moyenne[i] << " ";
-        }
 }
 
 // type Lecteur::Méthode ( liste des paramètres )
