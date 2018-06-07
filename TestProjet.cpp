@@ -10,27 +10,21 @@ int TU01 () {
 }
 
 int TU02 () {
-    cout << "Test02 : Lecture d'un fichier incomplet" << endl;
+    cout << "Test02 : Lecture d'un fichier corrompu" << endl;
     Lecteur lecteur = Lecteur ();
     return lecteur.chargerMetaDonnee("Test02.txt");
 }
 
 int TU03 () {
-    cout << "Test03 : Lecture d'un fichier avec des informations non conformes" << endl;
+    cout << "Test03 : Lecture d'un fichier vide" << endl;
     Lecteur lecteur = Lecteur ();
     return lecteur.chargerMetaDonnee("Test03.txt");
 }
 
 int TU04 () {
-    cout << "Test04 : Lecture d'un fichier vide" << endl;
+    cout << "Test04 : Aucun fichier correspondant" << endl;
     Lecteur lecteur = Lecteur ();
     return lecteur.chargerMetaDonnee("Test04.txt");
-}
-
-int TU05 () {
-    cout << "Test05 : Aucun fichier correspondant" << endl;
-    Lecteur lecteur = Lecteur ();
-    return lecteur.chargerMetaDonnee("Test05.txt");
 }
 
 //Lecture fichier données empreintes
@@ -105,12 +99,19 @@ int TU31 () {
     return lecteur.displayAttributs();
 }
 
+int TU32 () {
+    cout << "Test32: Demander un affichage lorsqu'un fichier est chargé" << endl;
+    Lecteur lecteur = Lecteur ();
+    lecteur.chargerMetaDonnee("HealthMeasurementDescription.txt");
+    lecteur.chargerDonnees("HealthMeasurementsWithLabels.txt", false);
+    return lecteur.displayAttributs();
+}
+
 int main () {
     cout << TU01() << endl;
     cout << TU02() << endl;
     cout << TU03() << endl;
     cout << TU04() << endl;
-    cout << TU05() << endl;
 
     cout << TU11() << endl;
     cout << TU12() << endl;
@@ -125,5 +126,6 @@ int main () {
     cout << TU25() << endl;
 
     cout << TU31() << endl;
+    cout << TU32() << endl;
     return 0;
 }
