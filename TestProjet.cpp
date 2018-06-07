@@ -36,19 +36,19 @@ int TU11 () {
 }
 
 int TU12 () {
-    cout << "Test12: Lecture d'un fichier incomplet" << endl;
+    cout << "Test12: Lecture d'un fichier corrompu" << endl;
     Lecteur lecteur = Lecteur ();
     return lecteur.chargerDonnees("Test12.txt", true);
 }
 
 int TU13 () {
-    cout << "Test13: Lecture d'un fichier avec des informations non conformes" << endl;
+    cout << "Test13: Lecture d'un fichier vide" << endl;
     Lecteur lecteur = Lecteur ();
     return lecteur.chargerDonnees("Test13.txt", true);
 }
 
 int TU14 () {
-    cout << "Test14: Lecture d'un fichier vide" << endl;
+    cout << "Test14: Aucun fichier correspondant" << endl;
     Lecteur lecteur = Lecteur ();
     return lecteur.chargerDonnees("Test14.txt", true);
 }
@@ -105,6 +105,13 @@ int TU32 () {
     lecteur.chargerMetaDonnee("HealthMeasurementDescription.txt");
     lecteur.chargerDonnees("HealthMeasurementsWithLabels.txt", false);
     return lecteur.displayAttributs();
+}
+
+//Production fichier résultat
+
+int main TU41() {
+    cout << "Test41:Lancer la production d'un fichier résultat lorsqu'aucune donnée n'a été chargée" << endl;
+    return 0;
 }
 
 int main () {
