@@ -11,9 +11,11 @@ e-mail               : $EMAIL$
 #define ATTRIBUT_H
 
 //--------------------------------------------------- Interfaces utilisees
+using namespace std;
+#include <string>
 
 //------------------------------------------------------------- Constantes
-enum Type {LONG, BOOL, INT, DOUBLE, STRING };
+enum Type {LONG, BOOL, INT, DOUBLE, STRING};
 
 //------------------------------------------------------------------ Types
 
@@ -29,23 +31,31 @@ class Attribut
 
 public:
 	//----------------------------------------------------- Methodes publiques
-	std::string getNom() const;
+	string getNom() const;
 	/* Get du nom l'element Attribut */
 
 	Type getType() const;
 	/*Get type de l'element Attribut*/
 
-	string getValeur(){
+	string getValeur() const{
 		return valeur;
 	}
 
+    void setNom(const string unNom) {
+        nom = unNom;
+    }
+    
+    void setType(Type unType) {
+        type = unType;
+    }
+    
 	void setValeur(string uneValeur){
 		valeur = uneValeur;
 	}
 
 	//------------------------------------------------- Surcharge d'operateurs
 
-	friend std::ostream & operator << (std::ostream & out, const Attribut & a);
+	friend ostream & operator << (ostream & out, const Attribut & a);
     // Mode d'emploi :
     //   -
     // Contrat :
@@ -89,7 +99,7 @@ protected:
 	//----------------------------------------------------- Methodes protegees
 
 	//----------------------------------------------------- Attributs proteges
-	std::string nom;
+	string nom;
 	Type type;
 	string valeur;
 };
@@ -97,7 +107,7 @@ protected:
 //-------------------------------- Autres definitions dependantes de <Attribut>
 
 inline std::ostream & operator << (std::ostream & out, const Attribut & a) {
-    out << "(" << a.getNom() << ";" << a.getType() << ")" << flush;
+    out << "(" << a.getNom() << ";" << a.getType() << "; valeur : " << a.getValeur() << ")" << flush;
     return out;
 }
 

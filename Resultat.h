@@ -64,7 +64,7 @@ public:
     // Contrat :
     //
 
-    virtual ~Resultat ( );
+    virtual ~Resultat ( ){}
     // Mode d'emploi :
     //
     // Contrat :

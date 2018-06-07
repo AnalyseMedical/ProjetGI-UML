@@ -11,8 +11,8 @@
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
-using namespace std;
 #include <iostream>
+using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Executer.h"
@@ -22,8 +22,15 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-    list<std::string> Executer::getMaladie() const {
-		list<std::string> result;
+    vector<string> Executer::getMaladie(Lecteur &l) const {
+		vector<string> result;
+        donnees tmp = l.getData();
+        donnees::iterator it;
+        for(it = tmp.begin(); it != tmp.end(); it++)
+        {
+            if(it->first != "")
+                result.push_back(it->first);
+        }
 		return result;
     }
     // type Méthode ( liste des paramètres );
@@ -32,35 +39,44 @@ using namespace std;
     // Contrat :
     //
 
-    /*map<Empreinte,Resultat> Executer::diagnostic(string nomFichier){
-		return null;
-    }*/
+    map<Empreinte,Resultat> Executer::diagnostic(string nomFichier, string nomFichierMeta){
+		cout << "diagnostic" << endl;
+		map<Empreinte,Resultat> diagn;
+		return diagn;
+    }
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    /*list<Resultat> Executer::diagnostic(Empreinte e){
-
-    }*/
+    list<Resultat> Executer::diagnostic(Empreinte e){
+		cout << "diagnostic" << endl;
+		list<Resultat> diagn;
+		return diagn;
+    }
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    /*bool Executer::chargerDonnee(string nomFichier){
-
-    }*/
+   /* bool Executer::chargerDonnee(string nomFichier){
+		cout << "chargerDonnee" << endl;
+        l.chargerDonnees(nomFichier,false);
+		return true;
+    }
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    /*bool Executer::chargerMetaDonnee(string nomFichier){
-
+    bool Executer::chargerMetaDonnee(string nomFichier){
+		cout << "chargerMetaDonnee" << endl;
+        l.chargerMetaDonnee(nomFichier);
+        //l.displayAttributs();
+		return true;
     }*/
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :

@@ -82,11 +82,6 @@ protected:
 };
 
 //-------------------------------- Autres définitions dépendantes de <ResultatDetailles>
-inline ostream & operator << (ostream & out, const ResultatDetailles & r) {
-    string attributs = afficherVector(r.Attributs);
-    return out << r.maladie << ";" << r.probabilite <<";" << attributs << flush ;
-}
-
 static string afficherVector(vector<Attribut> v){
     string res = "";
     for(int unsigned i=0;i<v.size();i++){
@@ -94,6 +89,13 @@ static string afficherVector(vector<Attribut> v){
     }
     return res;
 }
+
+inline ostream & operator << (ostream & out, const ResultatDetailles & r) {
+    string attributs = afficherVector(r.Attributs);
+    return out << r.maladie << ";" << r.probabilite <<";" << attributs << flush ;
+}
+
+
 
 #endif // ResultatDetailles_H
 

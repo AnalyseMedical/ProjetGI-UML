@@ -11,8 +11,8 @@ e-mail               : $EMAIL$
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include systeme
-using namespace std;
 #include <iostream>
+using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Attribut.h"
@@ -42,6 +42,7 @@ Attribut::Attribut(const Attribut & unAttribut)
 {
 	nom = unAttribut.getNom();
 	type = unAttribut.getType();
+    valeur = unAttribut.getValeur();
 #ifdef MAP
 	cout << "Appel au constructeur de copie de <Attribut>" << endl;
 #endif

@@ -13,6 +13,7 @@ e-mail               : $EMAIL$
 //--------------------------------------------------- Interfaces utilisees
 #include "Attribut.h"
 #include <list>
+#include <string>
 
 //------------------------------------------------------------- Constantes
 
@@ -36,6 +37,7 @@ public:
 	// Contrat :
 	//
 	list<Attribut> getValeur() const;
+    void addValeur(Attribut a);
 	string getMaladie() const;
 	void setMaladie(string uneMaladie);
 	void setValeur(list<Attribut> uneListe);
@@ -83,11 +85,11 @@ protected:
 //-------------------------------- Autres definitions dependantes de <Empreinte>
 
 inline std::ostream & operator << (std::ostream & out, const Empreinte & e) {
-	list<Attribut> la = e.getValeur();
-    for(list<Attribut>::iterator i = la.begin(); i != la.end();++i){
-        out << *i << ";" << flush;
+    list<Attribut> tmp = e.getValeur();
+    for(list<Attribut>::iterator i = tmp.begin(); i != tmp.end();++i){
+        out << *i << ";" << endl;
     }
-	out << e.getMaladie() << endl;
+	//out << "(" << e.getMaladie() << ")" << endl;
 	return out;
 }
 
