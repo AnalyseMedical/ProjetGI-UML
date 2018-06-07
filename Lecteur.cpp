@@ -53,6 +53,7 @@ int Lecteur::chargerMetaDonnee(string lectStr)
 			attributs.push_back(attribut);
 			getline(fichier,value);
         }
+        cout << "Fichier chargé" << endl;
         return 0;
     } else{
         cout << "Aucun fichier" << endl;
