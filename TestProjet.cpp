@@ -31,6 +31,7 @@ int TU04 () {
 //Lecture fichier données empreintes
 
 int TU11 () {
+    cout << "Test11: Lecture d'un fichier fonctionnel" << endl;
     Lecteur lecteur = Lecteur ();
     lecteur.chargerMetaDonnee("HealthMeasurementDescription.txt");
     return lecteur.chargerDonnees("Test11.txt", true);
@@ -129,6 +130,27 @@ int TU41() {
 
 int TU42() {
     cout << "Test42:Production d'un fichier résultat après chargement d'une empreinte conforme mais sans fichier maladie" << endl;
+    Lecteur lecteur = Lecteur();
+    lecteur.chargerMetaDonnee("HealthMeasurementDescription.txt");
+    lecteur.diagnostic("Test42.txt");
+    return 0;
+}
+
+int TU43() {
+    cout << "Test43: Production d'un fichier résultat après chargement d'un fichier  maladie conforme mais sans fichier d'empreinte" << endl;
+    Lecteur lecteur = Lecteur();
+    lecteur.chargerMetaDonnee("HealthMeasurementDescription.txt");
+    lecteur.chargerDonnees("HealthMeasurementsWithLabels.txt", false);
+    lecteur.diagnostic("Test43.txt");
+    return 0;
+}
+
+int TU44() {
+    cout << "Test44: Production d'un fichier résultat après chargement d'un fichier maladie et d'un fichier d'empreinte conforme" << endl;
+    Lecteur lecteur = Lecteur();
+    lecteur.chargerMetaDonnee("HealthMeasurementDescription.txt");
+    lecteur.chargerDonnees("HealthMeasurementsWithLabels.txt", false);
+    lecteur.diagnostic("Test44.txt");
     return 0;
 }
 
@@ -144,7 +166,7 @@ int main () {
     cout << TU14() << endl;
     cout << TU15() << endl;
 
-    cout << TU21() << endl;
+   /* cout << TU21() << endl;
     cout << TU22() << endl;
     cout << TU23() << endl;
     cout << TU24() << endl;
@@ -154,5 +176,9 @@ int main () {
     cout << TU32() << endl;
 
     cout << TU41() << endl;
+    cout << TU42() << endl;
+    cout << TU43() << endl;
+    cout << TU44() << endl;*/
+    //cout << TU45() << endl;
     return 0;
 }

@@ -84,13 +84,13 @@ int Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
                 bool fichierEstVide=true;
                 while(!fichierA.eof())
                 {
-                    fichierEstVide=false;
                     int j = 0;
                     getline(fichierA,line);
                     istringstream iss2(line);
                     Empreinte e;
                     while(!iss2.eof() && j < (attributs.size()))
                     {
+                        fichierEstVide=false;
                         getline(iss2,value,POINTVIRGULE);
                         Attribut a = Attribut(attributs[j].getNom(),attributs[j].getType(),value);
                         j++;
@@ -98,10 +98,6 @@ int Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
                     }
                     getline(iss2,maladie,SAUTDELIGNE);
                     e.setMaladie(maladie);
-<<<<<<< HEAD
-=======
-
->>>>>>> 5926b38c89000c4685fd4d753aa6849c793d3a68
                     //-------- code ajouté
                     for (const Attribut & a : e.getValeur())
                     {
@@ -139,13 +135,14 @@ int Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
                 bool fichierEstVide=true;
                 while(!fichierA.eof())
                 {
-                    fichierEstVide=false;
                     int j = 0;
                     getline(fichierA,line);
                     istringstream iss2(line);
                     Empreinte e;
                     while(!iss2.eof() && j < (attributs.size()))
                     {
+                        cout<<"rentre"<<endl;
+                        fichierEstVide=false;
                         getline(iss2,value,POINTVIRGULE);
                         Attribut a = Attribut(attributs[j].getNom(),attributs[j].getType(),value);
                         j++;
@@ -184,7 +181,6 @@ int Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
                 cout << "Fichier de données empreintes à analyser chargé" << endl;
             } else {
                 cout << "Fichier de données maladies chargé" << endl;
->>>>>>> 429192b2f988f33bc5b76d1b130767e476ef40b9
             }
             return 0;
         } else {
