@@ -35,7 +35,7 @@ void Lecteur::displayEmpreinte(){
         cout << emp_aAnalyser[i];
 }
 
-void Lecteur::chargerMetaDonnee(string lectStr)
+int Lecteur::chargerMetaDonnee(string lectStr)
 {
     ifstream fichier;
     fichier.open(lectStr);
@@ -45,15 +45,17 @@ void Lecteur::chargerMetaDonnee(string lectStr)
         getline(fichier,key,POINTVIRGULE);
         getline(fichier,value);
         while(!fichier.eof()){
-        getline(fichier,key,POINTVIRGULE);
-        getline(fichier,value,SAUTDELIGNE);
-        Type t = StringToType(value);
-        Attribut attribut = Attribut(key,t);
-        attributs.push_back(attribut);
-        getline(fichier,value);
+			getline(fichier,key,POINTVIRGULE);
+			getline(fichier,value,SAUTDELIGNE);
+			Type t = StringToType(value);
+			Attribut attribut = Attribut(key,t);
+			attributs.push_back(attribut);
+			getline(fichier,value);
         }
+        return 0;
     } else{
-        cout << "pas de fichier" << endl;
+        cout << "Aucun fichier" << endl;
+        return -1;
     }
 }
 

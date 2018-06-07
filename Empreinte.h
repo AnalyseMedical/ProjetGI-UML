@@ -37,8 +37,14 @@ public:
 	// Contrat :
 	//
 	list<Attribut> getValeur() const;
+	
+	
     void addValeur(Attribut a);
+    
+    
 	string getMaladie() const;
+	
+	
 	void setMaladie(string uneMaladie);
 
 
