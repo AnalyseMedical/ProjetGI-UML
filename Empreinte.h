@@ -90,11 +90,10 @@ protected:
 
 inline std::ostream & operator << (std::ostream & out, const Empreinte & e) {
     vector<Attribut> tmp = e.getValeur();
-    for(vector<Attribut>::iterator i = tmp.begin(); i != tmp.end();++i){
-        out << *i << ";" << endl;
+    for(const Attribut & att : tmp){
+        out << att ;
     }
-	//out << "(" << e.getMaladie() << ")" << endl;
-	return out;
+    return out;
 }
 
 #endif // EMPREINTE_H

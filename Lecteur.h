@@ -101,6 +101,7 @@ protected:
     donnees data;
     vector<Empreinte> emp_aAnalyser;
     vector<Empreinte> moyenne;
+    unordered_map<string, unordered_map<string, unordered_map<string, int>>> maladieStrings;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Lecteur>
