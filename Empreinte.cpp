@@ -22,7 +22,7 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Methodes publiques
-list<Attribut> Empreinte::getValeur() const {
+vector<Attribut> Empreinte::getValeur() const {
 	return valeur;
 }
 
@@ -37,12 +37,6 @@ string Empreinte::getMaladie() const{
 void Empreinte::setMaladie(string uneMaladie){
 	maladie = uneMaladie;
 }
-// type Empreinte::Methode ( liste des parametres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Methode
-
 
 //------------------------------------------------- Surcharge d'operateurs
 
@@ -62,7 +56,7 @@ Empreinte::Empreinte(const Empreinte & unEmpreinte)
 Empreinte::Empreinte(){};
 
 
-Empreinte::Empreinte(list<Attribut> val, string UneMaladie)
+Empreinte::Empreinte(vector<Attribut> val, string UneMaladie)
 // Algorithme :
 //
 {

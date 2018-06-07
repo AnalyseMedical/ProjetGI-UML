@@ -50,9 +50,9 @@ using namespace std;
     // Contrat :
     //
 
-    list<Resultat> Executer::diagnostic(Empreinte e){
+    vector<Resultat> Executer::diagnostic(Empreinte e){
 		cout << "diagnostic" << endl;
-		list<Resultat> diagn;
+		vector<Resultat> diagn;
 		return diagn;
     }
     // type Méthode ( liste des paramètres );
@@ -83,7 +83,7 @@ using namespace std;
     //
     // Contrat :
     //
-    
+
 
 //------------------------------------------------- Surcharge d'opérateurs
 

@@ -16,7 +16,7 @@ using namespace std;
 //------------------------------------------------------ Include personnel
 #include "Interface.h"
 #include "Lecteur.h"
-#include <list>
+#include <vector>
 #include <unordered_map>
 
 
@@ -44,7 +44,7 @@ int main(void)
 
 void Interface::afficherOperation(Lecteur &l){
 	// Algorithme :
-	
+
 	int operation = -1;
 
 	while (operation!=0) {
@@ -52,9 +52,9 @@ void Interface::afficherOperation(Lecteur &l){
 		cout << "1 : Demander un diagnostic " << endl;
 		cout << "2 : Afficher les maladies connues " << endl;
 		cout << "0 : Exit " << endl;
-		
+
 		cin >> operation;
-		
+
 		switch (operation) {
 			case 1 :
                 cout << "Entrer le nom d'un fichier de données empreintes : " << endl;
@@ -70,7 +70,7 @@ void Interface::afficherOperation(Lecteur &l){
                 break;
 		}
 	}
-    
+
 } //----- Fin de afficherOperation
 
 void Interface::afficherMaladie(Lecteur &l){
