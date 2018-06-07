@@ -26,7 +26,7 @@ const char SAUTDELIGNE = '\r';
 
 const double MAX_DISTANCE = 1000000000;
 //----------------------------------------------------------------- PUBLIC
-static Type StringToType(string s); 
+static Type StringToType(string s);
 
 //----------------------------------------------------- Méthodes publiques
 
@@ -65,7 +65,7 @@ int Lecteur::chargerMetaDonnee(string lectStr)
     }
 }
 
-//lit le fichier de donn�e :
+//lit le fichier de donnee :
 int Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
 {
     ifstream fichierA;
@@ -81,8 +81,10 @@ int Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
                 cout << "Et là ?" << endl;                
                 getline(fichierA,firstLine);
                 //Code pour lire les empreintes :
+                bool fichierEstVide=true;
                 while(!fichierA.eof())
                 {
+                    fichierEstVide=false;
                     int j = 0;
                     getline(fichierA,line);
                     istringstream iss2(line);
@@ -96,6 +98,10 @@ int Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
                     }
                     getline(iss2,maladie,SAUTDELIGNE);
                     e.setMaladie(maladie);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5926b38c89000c4685fd4d753aa6849c793d3a68
                     //-------- code ajouté
                     for (const Attribut & a : e.getValeur())
                     {
@@ -112,7 +118,7 @@ int Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
                         }
                     }
                     //-------------------
-                    
+
                     getline(iss2,tmp);
                     if(data.find(e.getMaladie()) == data.end())
                     {
@@ -124,7 +130,35 @@ int Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
                         data.find(e.getMaladie())->second.push_back(e);
                     }
                 }
-            calculMoyenne();           
+                if(fichierEstVide){
+                    cerr<<"Fichier vide"<<endl;
+                    return 2;
+                }
+                calculMoyenne();
+            } else if (aAnalyser == true){
+                bool fichierEstVide=true;
+                while(!fichierA.eof())
+                {
+                    fichierEstVide=false;
+                    int j = 0;
+                    getline(fichierA,line);
+                    istringstream iss2(line);
+                    Empreinte e;
+                    while(!iss2.eof() && j < (attributs.size()))
+                    {
+                        getline(iss2,value,POINTVIRGULE);
+                        Attribut a = Attribut(attributs[j].getNom(),attributs[j].getType(),value);
+                        j++;
+                        e.addValeur(a);
+                    }
+                    emp_aAnalyser.push_back(e);
+                    //displayEmpreinte();
+                }
+                if(fichierEstVide){
+                    cerr<<"Fichier vide"<<endl;
+                    return 2;
+                }
+            calculMoyenne();
         } else if (aAnalyser == true){
             while(!fichierA.eof())
             {
@@ -150,8 +184,12 @@ int Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
                 cout << "Fichier de données empreintes à analyser chargé" << endl;
             } else {
                 cout << "Fichier de données maladies chargé" << endl;
+>>>>>>> 429192b2f988f33bc5b76d1b130767e476ef40b9
             }
             return 0;
+        } else {
+            cerr << " Aucun fichier " << endl;
+            return -1;
             //return donnee;
         }
     } else {
@@ -159,7 +197,7 @@ int Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
         return -1;
     }
     } catch (exception e) {
-        cout << "Erreur lors de la lecture" << endl;
+        cerr << "Erreur lors de la lecture" << endl;
         return -1;
     }
     return 0;
@@ -169,7 +207,7 @@ void Lecteur::calculMoyenne(){
     donnees::iterator itD;
     vector<Empreinte>::iterator itE;
     vector<Attribut>::iterator itA;
-    
+
     //calcul de la moyenne (somme des valeurs des attributs)
     for(itD = data.begin(); itD != data.end(); itD++){
         int nb = 0;
@@ -177,7 +215,7 @@ void Lecteur::calculMoyenne(){
         int tmp = 0;
         vector<Attribut> vectorA = itD->second.begin()->getValeur();
         copy(vectorA.begin()+1,vectorA.end(),vectAt.begin());
-        
+
         size_t taille = vectorA.size();
         for (int i = 0; i < taille; ++i)
         {
@@ -196,7 +234,7 @@ void Lecteur::calculMoyenne(){
                 vectAt[i].setValeur(meilleurString);
             }
         }
-        
+
         for (itE = ++(itD->second.begin()); itE != itD->second.end(); itE++)
         {
             int i = 0;
@@ -215,7 +253,7 @@ void Lecteur::calculMoyenne(){
             }
             nb++;
         }
-        
+
         //calcul de la moyenne (division)
         int size = vectAt.size();
         Empreinte e;
@@ -234,7 +272,7 @@ void Lecteur::calculMoyenne(){
         e.setMaladie(itD->first);
         moyenne.push_back(e);
     }
-    
+
      // affichage de la moyenne
     for(int i = 0; i < moyenne.size(); i++){
         cout << "moyenne : " << moyenne[i] << " ";
@@ -260,7 +298,7 @@ int Lecteur::displayAttributs() const
     return 0;
 }
 
-int Lecteur::displayData() 
+int Lecteur::displayData()
 {
     if(data.begin() == data.end()) {
         cout << "Donnee abscente" << endl;
