@@ -31,32 +31,36 @@ int TU04 () {
 //Lecture fichier données empreintes
 
 int TU11 () {
-    cout << "Test11: Lecture d'un fichier fonctionnel" << endl;
     Lecteur lecteur = Lecteur ();
+    lecteur.chargerMetaDonnee("HealthMeasurementDescription.txt");
     return lecteur.chargerDonnees("Test11.txt", true);
 }
 
 int TU12 () {
     cout << "Test12: Lecture d'un fichier corrompu" << endl;
     Lecteur lecteur = Lecteur ();
+    lecteur.chargerMetaDonnee("HealthMeasurementDescription.txt");
     return lecteur.chargerDonnees("Test12.txt", true);
 }
 
 int TU13 () {
     cout << "Test13: Lecture d'un fichier vide" << endl;
     Lecteur lecteur = Lecteur ();
+    lecteur.chargerMetaDonnee("HealthMeasurementDescription.txt");
     return lecteur.chargerDonnees("Test13.txt", true);
 }
 
 int TU14 () {
     cout << "Test14: Aucun fichier correspondant" << endl;
     Lecteur lecteur = Lecteur ();
+    lecteur.chargerMetaDonnee("HealthMeasurementDescription.txt");
     return lecteur.chargerDonnees("Test14.txt", true);
 }
 
 int TU15 () {
     cout << "Test15: Lecture d'un fichier outrageusement volumineux" << endl;
     Lecteur lecteur = Lecteur ();
+    lecteur.chargerMetaDonnee("HealthMeasurementDescription.txt");
     return lecteur.chargerDonnees("Test15.txt", true);
 }
 
@@ -65,30 +69,35 @@ int TU15 () {
 int TU21 () {
     cout << "Test21: Lecture d'un fichier fonctionnel" << endl;
     Lecteur lecteur = Lecteur ();
+    lecteur.chargerMetaDonnee("HealthMeasurementDescription.txt");
     return lecteur.chargerDonnees("Test21.txt", false);
 }
 
 int TU22 () {
     cout << "Test22: Lecture d'un fichier incomplet" << endl;
     Lecteur lecteur = Lecteur ();
+    lecteur.chargerMetaDonnee("HealthMeasurementDescription.txt");
     return lecteur.chargerDonnees("Test22.txt", false);
 }
 
 int TU23 () {
     cout << "Test23: Lecture d'un fichier avec des informations non conformes" << endl;
     Lecteur lecteur = Lecteur ();
+    lecteur.chargerMetaDonnee("HealthMeasurementDescription.txt");
     return lecteur.chargerDonnees("Test23.txt", false);
 }
 
 int TU24 () {
     cout << "Test24: Lecture d'un fichier vide" << endl;
     Lecteur lecteur = Lecteur ();
+    lecteur.chargerMetaDonnee("HealthMeasurementDescription.txt");
     return lecteur.chargerDonnees("Test24.txt", false);
 }
 
 int TU25 () {
     cout << "Test25: Lecture d'un fichier outrageusement volumineux" << endl;
     Lecteur lecteur = Lecteur ();
+    lecteur.chargerMetaDonnee("HealthMeasurementDescription.txt");
     return lecteur.chargerDonnees("Test25.txt", false);
 }
 
@@ -97,6 +106,7 @@ int TU25 () {
 int TU31 () {
     cout << "Test31: Demander un affichage lorsqu'aucune donnée n'est chargée" << endl;
     Lecteur lecteur = Lecteur ();
+    lecteur.chargerMetaDonnee("HealthMeasurementDescription.txt");
     return lecteur.displayAttributs();
 }
 
@@ -114,7 +124,7 @@ int TU41() {
     cout << "Test41:Lancer la production d'un fichier résultat lorsqu'aucune donnée n'a été chargée" << endl;
     Lecteur lecteur = Lecteur();
     lecteur.diagnostic("Test41.txt");
-    return 0;
+    return 5;
 }
 
 int TU42() {

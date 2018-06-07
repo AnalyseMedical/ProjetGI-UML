@@ -45,6 +45,7 @@ int Lecteur::chargerMetaDonnee(string lectStr)
     if(fichier){
         getline(fichier,key,POINTVIRGULE);
         if(key==""){
+            cerr << "Fichier vide" << endl;
             return 2;
         }
         getline(fichier,value);
@@ -59,7 +60,7 @@ int Lecteur::chargerMetaDonnee(string lectStr)
         cout << "Fichier chargé" << endl;
         return 0;
     } else{
-        cout << "Aucun fichier" << endl;
+        cerr << "Aucun fichier" << endl;
         return -1;
     }
 }
@@ -77,6 +78,7 @@ int Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
             string tmp ="";
             if(aAnalyser == false){
                 string firstLine = "";
+                cout << "Et là ?" << endl;                
                 getline(fichierA,firstLine);
                 //Code pour lire les empreintes :
                 while(!fichierA.eof())
@@ -94,7 +96,6 @@ int Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
                     }
                     getline(iss2,maladie,SAUTDELIGNE);
                     e.setMaladie(maladie);
-                    
                     //-------- code ajouté
                     for (const Attribut & a : e.getValeur())
                     {
