@@ -75,14 +75,18 @@ void Lecteur::chargerDonnees(string lectStr)
             getline(fichierA,line);
             istringstream iss2(line);
             Empreinte e;
+            list<Attribut> la = e.getValeur();
             while(!iss2.eof() && j < (donnee.size()-1))
             {
                 getline(iss2,value,POINTVIRGULE);
                 Attribut a = Attribut(donnee[j],Attributs[j].getType(),value);
                 j++;
-                e.getValeur().push_back(a);
+                la.push_back(a);
+                //la.push_back(a);
             }
+            
             getline(iss2,maladie,SAUTDELIGNE);
+            e.setValeur(la);
             e.setMaladie(maladie);
             getline(iss2,tmp);
             
@@ -122,7 +126,7 @@ void Lecteur::displayData()
     for(it = data.begin(); it != data.end(); it++)
     {
         cout << it->first << " et " << flush;
-        displayList(it->second);
+        //displayList(it->second);
         cout << endl;
 
     }

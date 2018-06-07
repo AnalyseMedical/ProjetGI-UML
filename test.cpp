@@ -18,12 +18,10 @@ int main(){
     la.push_back(a2);
     la.push_back(a3);
     Empreinte e = Empreinte(la,"saucisse");
-    list<Attribut> la2 = e.getValeur();
+    /*list<Attribut> la2 = e.getValeur();
     for(list<Attribut>::iterator i = la2.begin(); i != la2.end();++i){
         cout << *i << ";" << flush;
-    }
-    //cout << e << endl;
-    //l.displayData();
-    
+    }*/
+    l.displayData();
     return 0;
 }

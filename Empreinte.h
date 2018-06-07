@@ -38,7 +38,7 @@ public:
 	list<Attribut> getValeur() const;
 	string getMaladie() const;
 	void setMaladie(string uneMaladie);
-
+	void setValeur(list<Attribut> uneListe);
 
 	//------------------------------------------------- Surcharge d'operateurs
 
@@ -83,7 +83,8 @@ protected:
 //-------------------------------- Autres definitions dependantes de <Empreinte>
 
 inline std::ostream & operator << (std::ostream & out, const Empreinte & e) {
-    for(list<Attribut>::iterator i = e.getValeur().begin(); i != e.getValeur().end();++i){
+	list<Attribut> la = e.getValeur();
+    for(list<Attribut>::iterator i = la.begin(); i != la.end();++i){
         out << *i << ";" << flush;
     }
 	out << e.getMaladie() << endl;

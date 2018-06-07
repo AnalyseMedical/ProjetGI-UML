@@ -32,6 +32,10 @@ string Empreinte::getMaladie() const{
 void Empreinte::setMaladie(string uneMaladie){
 	maladie = uneMaladie;
 }
+
+void Empreinte::setValeur(list<Attribut> uneListe) {
+	valeur = uneListe;
+} 
 // type Empreinte::Methode ( liste des parametres )
 // Algorithme :
 //
