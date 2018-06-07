@@ -11,21 +11,30 @@
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
-using namespace std;
 #include <iostream>
+using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Lecteur.h"
+#include <stdlib.h>
 #include <sstream>
 
 //------------------------------------------------------------- Constantes
 const char POINTVIRGULE = ';';
 const char SAUTDELIGNE = '\r';
 
+const double MAX_DISTANCE = 1000000000;
 //----------------------------------------------------------------- PUBLIC
 static Type StringToType(string s); 
 
 //----------------------------------------------------- Méthodes publiques
+
+void Lecteur::displayEmpreinte(){
+    int size = emp_aAnalyser.size();
+    for(int i = 0; i < size; ++i)
+        cout << emp_aAnalyser[i];
+}
+
 void Lecteur::chargerMetaDonnee(string lectStr)
 {
     ifstream fichier;
@@ -33,111 +42,234 @@ void Lecteur::chargerMetaDonnee(string lectStr)
     string key = "";
     string value = "";
     if(fichier){
-
+        getline(fichier,key,POINTVIRGULE);
+        getline(fichier,value);
         while(!fichier.eof()){
         getline(fichier,key,POINTVIRGULE);
         getline(fichier,value,SAUTDELIGNE);
         Type t = StringToType(value);
         Attribut attribut = Attribut(key,t);
-        Attributs.push_back(attribut);
+        attributs.push_back(attribut);
         getline(fichier,value);
-
-    }
-
+        }
+    } else{
+        cout << "pas de fichier" << endl;
     }
 }
 
 //lit le fichier de donn�e :
-void Lecteur::chargerDonnees(string lectStr)
+void Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
 {
     ifstream fichierA;
     fichierA.open(lectStr);
     if(fichierA){
-        string firstLine = "";
-        getline(fichierA,firstLine);
-        istringstream iss(firstLine);
-        vector<string> donnee;
-        string tmp = "";
-        while(!iss.eof())
-        {
-            getline(iss,tmp,POINTVIRGULE);
-            donnee.push_back(tmp);
-        }
-        
-        //Code pour lire les empreintes :
-        while(!fichierA.eof())
-        {
-            int j = 0;
-            string line = "";
-            string value = "";
-            string maladie="";
-            string tmp ="";
-            getline(fichierA,line);
-            istringstream iss2(line);
-            Empreinte e;
-            while(!iss2.eof() && j < (donnee.size()-1))
+        string line = "";
+        string value = "";
+        string maladie="";
+        string tmp ="";
+        if(aAnalyser == false){
+            string firstLine = "";
+            getline(fichierA,firstLine);
+            //Code pour lire les empreintes :
+            while(!fichierA.eof())
             {
-                getline(iss2,value,POINTVIRGULE);
-                Attribut a = Attribut(donnee[j],Attributs[j].getType(),value);
-                j++;
-                e.getValeur().push_back(a);
+                int j = 0;
+                getline(fichierA,line);
+                istringstream iss2(line);
+                Empreinte e;
+                while(!iss2.eof() && j < (attributs.size()))
+                {
+                    getline(iss2,value,POINTVIRGULE);
+                    Attribut a = Attribut(attributs[j].getNom(),attributs[j].getType(),value);
+                    j++;
+                    e.addValeur(a);
+                }
+                getline(iss2,maladie,SAUTDELIGNE);
+                e.setMaladie(maladie);
+                getline(iss2,tmp);
+                
+                if(data.find(e.getMaladie()) == data.end())
+                {
+                    list<Empreinte> listeE;
+                    listeE.push_back(e);
+                    data.insert(pair<string,list<Empreinte>>(e.getMaladie(),listeE));
+                } else
+                {
+                    data.find(e.getMaladie())->second.push_back(e);
+                }
             }
-            getline(iss2,maladie,SAUTDELIGNE);
-            e.setMaladie(maladie);
-            getline(iss2,tmp);
-            
-            if(data.find(e.getMaladie()) == data.end())
+            calculMoyenne();
+        } else if (aAnalyser == true){
+            while(!fichierA.eof())
             {
-                list<Empreinte> listeE;
-                listeE.push_back(e);
-                data.insert(pair<string,list<Empreinte>>(e.getMaladie(),listeE));
-            } else
-            {
-                data.find(e.getMaladie())->second.push_back(e);
+                int j = 0;
+                getline(fichierA,line);
+                istringstream iss2(line);
+                Empreinte e;
+                while(!iss2.eof() && j < (attributs.size()))
+                {
+                    getline(iss2,value,POINTVIRGULE);
+                    Attribut a = Attribut(attributs[j].getNom(),attributs[j].getType(),value);
+                    j++;
+                    e.addValeur(a);
+                }
+                emp_aAnalyser.push_back(e);
+                //displayEmpreinte();
             }
         }
         //return donnee;
     } else {
         cout << " Pas de fichier " << endl;
-        //return vector<string>();
     }
 }
+
+void Lecteur::calculMoyenne(){
+    donnees::iterator itD;
+    list<Empreinte>::iterator itE;
+    list<Attribut>::iterator itA;
+    
+    //calcul de la moyenne (somme des valeurs des attributs)
+    for(itD = data.begin(); itD != data.end(); itD++){
+        int nb = 0;
+        vector<Attribut> vectAt(attributs.size()-1);
+        int tmp = 0;
+        list<Attribut> listeA = itD->second.begin()->getValeur();
+        for(itA = ++(listeA.begin()); itA != listeA.end(); itA++){
+            vectAt[tmp++] = *itA;
+        }
+        
+        for (itE = ++(itD->second.begin()); itE != itD->second.end(); itE++)
+        {
+            int i = 0;
+            listeA = itE->getValeur();
+            for(itA = ++(listeA.begin()); itA != listeA.end(); itA++){
+                Attribut a = *itA;
+                if(a.getType() == DOUBLE){
+                        vectAt[i].setValeur(to_string( stod(vectAt[i].getValeur())  + stod(a.getValeur()) ));
+                        vectAt[i].setType(DOUBLE);
+                        vectAt[i++].setNom(a.getNom());
+                } else
+                {
+                    vectAt[i].setNom(a.getNom());
+                    vectAt[i++].setValeur(a.getValeur());
+                }
+            }
+            nb++;
+        }
+        
+        //calcul de la moyenne (division)
+        int size = vectAt.size();
+        Empreinte e;
+        for(int i = 0; i < size; ++i)
+        {
+            switch(vectAt[i].getType()){
+                case DOUBLE:
+                    vectAt[i].setValeur(to_string(stod(vectAt[i].getValeur())/nb));
+                    e.addValeur(vectAt[i]);
+                    break;
+                default :
+                    e.addValeur(vectAt[i]);
+                    break;
+            }
+        }
+        e.setMaladie(itD->first);
+        moyenne.push_back(e);
+    }
+    
+     // affichage de la moyenne
+    for(int i = 0; i < moyenne.size(); i++){
+            cout << moyenne[i] << " ";
+        }
+}
+
 // type Lecteur::Méthode ( liste des paramètres )
 // Algorithme :
 //
 //{
 //} //----- Fin de Méthode
 
-void Lecteur::displayAttributs()
+void Lecteur::displayAttributs() const
 {
-    for(int i =0;i<Attributs.size();i++)
+    if(attributs.size() == 0)
+        cout << "metaDonnee abscente" << endl;
+    for(int i =0;i<attributs.size();i++)
     {
-        cout << Attributs[i] << endl;
+        cout << attributs[i] << endl;
     }
 }
 
-void Lecteur::displayData()
+void Lecteur::displayData() 
 {
+    if(data.begin() == data.end())
+        cout << "donnee abscente" << endl;
     donnees::iterator it;
     for(it = data.begin(); it != data.end(); it++)
     {
-        cout << it->first << " et " << flush;
+        cout << it->first << " et " << endl;
         displayList(it->second);
         cout << endl;
 
     }
 }
 
-void Lecteur::displayList(list<Empreinte> l){
+void Lecteur::displayList(list<Empreinte> l) const{
+    list<Empreinte> tmp = l;
     list<Empreinte>::iterator it;
-    for(it = l.begin(); it != l.end(); it++)
+    for(it = tmp.begin(); it != tmp.end(); it++)
     {
         cout << "valeur empreinte : " << *it << endl;
     }
 }
 
 
+vector<pair<Empreinte,Resultat>> Lecteur::diagnostic(string nomFichierEmpreinte){
+    vector<pair<Empreinte,Resultat>> res;
+    chargerDonnees(nomFichierEmpreinte,true);
+    int size = emp_aAnalyser.size();
+    for(int i = 0; i < size; ++i){
+        Resultat r = chercherMaladie(emp_aAnalyser[i]);
+        pair<Empreinte,Resultat> pairAajouter(emp_aAnalyser[i],r);
+        res.push_back(pairAajouter);
+    }
+    return res;
+}
 
+Resultat Lecteur::chercherMaladie(Empreinte e){
+    string maladie = "";
+    double distanceActuelle = MAX_DISTANCE;
+    double distancetotale = 0;
+    int size = moyenne.size();
+    for (int i = 0; i < size; ++i)
+    {
+        if(moyenne[i].getMaladie() !=""){
+            Empreinte temoin = moyenne[i];
+            double tmp = testMaladie(temoin,e);
+            distancetotale += tmp;
+            if(tmp < distanceActuelle){
+                distanceActuelle = tmp;
+                maladie = temoin.getMaladie();
+             }
+          }
+    }
+    double probabilite = 100*(1-distanceActuelle/distancetotale);
+    Resultat r(maladie,probabilite);
+    return r;
+}
+
+
+double Lecteur::testMaladie(Empreinte temoin,Empreinte e){
+    int size = e.getValeur().size();
+    double distance = 0;
+    for(int i = 0; i < size; ++i)
+    {
+        if(temoin.getValeur().at(i).getType == DOUBLE){
+            double moyenne = stod(temoin.getValeur().at(i));
+            distance += abs(stod(e.getValeur().at(i))-moyenne)*abs(stod(e.getValeur().at(i))-moyenne);
+        }
+    }
+    double proba = 0;
+    return sqrt(distance);
+}
 
 //------------------------------------------------- Surcharge d'opérateurs
 
@@ -176,10 +308,15 @@ Lecteur::~Lecteur ( )
 
 static Type StringToType(string s){
     Type t;
+    if(s=="NoId"){
+        return t = LONG;
+    }
     if(s=="string"){
         return t = STRING;
     } else if(s=="double"){
         return t = DOUBLE;
+    } else {
+        return t = INT;
     }
 }
 

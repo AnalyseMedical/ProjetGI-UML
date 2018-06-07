@@ -10,25 +10,43 @@
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
-using namespace std;
 #include <iostream>
+using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Interface.h"
+#include "Lecteur.h"
 #include <list>
+#include <unordered_map>
+
 
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
+std::string nomFichierDonnees;
+std::string nomFichierMeta;
+std::string nomFichierEmpreinte;
 
 //----------------------------------------------------- Méthodes publiques
-void Interface::afficherOperation(){
+int main(void)
+{
+    Interface i;
+    cout << "Entrer le nom d'un fichier de métadonnées : " << endl;
+    nomFichierMeta = "HealthMeasurementDescription.txt";
+    Lecteur l;
+    l.chargerMetaDonnee("HealthMeasurementDescription.txt");
+    cout << "Entrer le nom d'un fichier de données empreintes : " << endl;
+    nomFichierDonnees = "HealthMeasurementsWithLabels.txt";
+    l.chargerDonnees("HealthMeasurementsWithLabels.txt",false);
+    i.afficherOperation(l);
+    return 0;
+}
+
+void Interface::afficherOperation(Lecteur &l){
 	// Algorithme :
 	
 	int operation = -1;
-	std::string nomFichierDonnees;
-	std::string nomFichierMeta;
-	
+
 	while (operation!=0) {
 		cout << "Veuillez choisir l'opération à effectuer : " << endl;
 		cout << "1 : Demander un diagnostic " << endl;
@@ -39,41 +57,40 @@ void Interface::afficherOperation(){
 		
 		switch (operation) {
 			case 1 :
-				cout << "Entrer le nom d'un fichier de métadonnées : " << endl;
-				cin >> nomFichierMeta;
-				cout << "Entrer le nom d'un fichier de données empreintes : " << endl;
-				cin >> nomFichierDonnees;
-				this->demandeDiagnostic(nomFichierDonnees, nomFichierMeta);
+                cout << "Entrer le nom d'un fichier de données empreintes : " << endl;
+                cin >> nomFichierEmpreinte;
+				this->demandeDiagnostic(nomFichierEmpreinte,l);
 				break;
 			case 2 :
-				this->afficherMaladie();
+				this->afficherMaladie(l);
 				break;
 			case 0 :
 				break;
+            default :
+                break;
 		}
 	}
-				
-			
+    
 } //----- Fin de afficherOperation
 
-
-void Interface::afficherMaladie(){
+void Interface::afficherMaladie(Lecteur &l){
 	// Algorithme :
-	
-    list<string> maladie = exe.getMaladie();
-    for(list<string>::iterator i = maladie.begin(); i != maladie.end();++i){
-        cout << *i << endl;
+    vector<string> maladie = exe.getMaladie(l);
+    int nbMaladie = maladie.size();
+    for(int i = 0; i < nbMaladie ;++i){
+        cout << maladie[i] << endl;
     }
 } //----- Fin de afficherMaladie
 
 
-void Interface::demandeDiagnostic(string nomFichierDonnees, string nomFichierMeta){
+void Interface::demandeDiagnostic(string nomFichierEmpreinte,Lecteur &l){
 	// Algorithme :
-	
-    map<Empreinte,Resultat> resultat = exe.diagnostic(nomFichierDonnees, nomFichierMeta);
-    for(map<Empreinte,Resultat>::iterator i = resultat.begin(); i != resultat.end();++i){
+    l.diagnostic(nomFichierEmpreinte);
+    /*unordered_map<Empreinte,Resultat> resultat = */
+    //l.diagnostic(nomFichierEmpreinte);
+    /*for(unordered_map<Empreinte,Resultat>::iterator i = resultat.begin(); i != resultat.end();++i){
         cout << i->first << ";" << i->second << endl;
-    }
+    }*/
 } //----- Fin de demandeDiagnostic
 
 
@@ -86,14 +103,14 @@ void Interface::demandeDiagnostic(string nomFichierDonnees, string nomFichierMet
 
 
 //-------------------------------------------- Constructeurs - destructeur
-/*Interface::Interface ( const Interface & unInterface )
+Interface::Interface ( const Interface & unInterface )
 // Algorithme :
 //
 {
 #ifdef MAP
     cout << "Appel au constructeur de copie de <Interface>" << endl;
 #endif
-} //----- Fin de Interface (constructeur de copie)*/
+} //----- Fin de Interface (constructeur de copie)
 
 
 Interface::Interface ( )

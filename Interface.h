@@ -12,6 +12,7 @@
 //--------------------------------------------------- Interfaces utilisées
 #include "Executer.h"
 #include <string>
+
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -28,21 +29,27 @@ class Interface
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    void afficherOperation();
+    
+    Executer getExecuter(){
+        return exe;
+    }
+    
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    void afficherMaladie();
+    void afficherOperation(Lecteur &l);
+
+    void afficherMaladie(Lecteur &l);
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    void demandeDiagnostic(string nomFichier, string nomFichierMeta);
+    void demandeDiagnostic(string nomFichierEmpreinte, Lecteur &l);
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
     //

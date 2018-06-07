@@ -19,6 +19,8 @@ using namespace std;
 #include <unordered_map>
 #include <list>
 #include "Empreinte.h"
+#include "Resultat.h"
+//#include "ResultatDetailles.h"
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -43,16 +45,29 @@ public:
     // Contrat :
     //
     void displayData();
+    donnees getData() const{
+        return data;
+    }
 
-    void displayAttributs();
+    void displayAttributs() const;
 
-    void displayList(list<Empreinte> l);
+    void displayList(list<Empreinte> l) const;
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
     //
     // Contrat :
     //
-    void chargerDonnees(string lecStr);
+    void chargerDonnees(string lecStr, bool aAnalyser);
+    
+    void calculMoyenne();
+    
+    void displayEmpreinte();
+    
+    vector<pair<Empreinte,Resultat>> diagnostic(string nomFichierEmpreinte);
+    Resultat chercherMaladie(Empreinte e);
+    
+    double testMaladie(Empreinte temoin,Empreinte e);
+
 
 //------------------------------------------------- Surcharge d'opérateurs
 
@@ -81,9 +96,10 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-    vector<Attribut> Attributs;
+    vector<Attribut> attributs;
     donnees data;
-
+    vector<Empreinte> emp_aAnalyser;
+    vector<Empreinte> moyenne;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Lecteur>

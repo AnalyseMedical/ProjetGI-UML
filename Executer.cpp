@@ -11,8 +11,8 @@
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
-using namespace std;
 #include <iostream>
+using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Executer.h"
@@ -22,8 +22,15 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-    list<std::string> Executer::getMaladie() const {
-		list<std::string> result;
+    vector<string> Executer::getMaladie(Lecteur &l) const {
+		vector<string> result;
+        donnees tmp = l.getData();
+        donnees::iterator it;
+        for(it = tmp.begin(); it != tmp.end(); it++)
+        {
+            if(it->first != "")
+                result.push_back(it->first);
+        }
 		return result;
     }
     // type Méthode ( liste des paramètres );
@@ -54,8 +61,9 @@ using namespace std;
     // Contrat :
     //
 
-    bool Executer::chargerDonnee(string nomFichier){
+   /* bool Executer::chargerDonnee(string nomFichier){
 		cout << "chargerDonnee" << endl;
+        l.chargerDonnees(nomFichier,false);
 		return true;
     }
     // type Méthode ( liste des paramètres );
@@ -66,8 +74,10 @@ using namespace std;
 
     bool Executer::chargerMetaDonnee(string nomFichier){
 		cout << "chargerMetaDonnee" << endl;
+        l.chargerMetaDonnee(nomFichier);
+        //l.displayAttributs();
 		return true;
-    }
+    }*/
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
     //

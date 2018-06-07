@@ -37,6 +37,7 @@ public:
 	// Contrat :
 	//
 	list<Attribut> getValeur() const;
+    void addValeur(Attribut a);
 	string getMaladie() const;
 	void setMaladie(string uneMaladie);
 
@@ -84,10 +85,11 @@ protected:
 //-------------------------------- Autres definitions dependantes de <Empreinte>
 
 inline std::ostream & operator << (std::ostream & out, const Empreinte & e) {
-    for(list<Attribut>::iterator i = e.getValeur().begin(); i != e.getValeur().end();++i){
-        out << *i << ";" << flush;
+    list<Attribut> tmp = e.getValeur();
+    for(list<Attribut>::iterator i = tmp.begin(); i != tmp.end();++i){
+        out << *i << ";" << endl;
     }
-	out << e.getMaladie() << endl;
+	//out << "(" << e.getMaladie() << ")" << endl;
 	return out;
 }
 

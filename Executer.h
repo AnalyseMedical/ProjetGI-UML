@@ -18,6 +18,7 @@ using namespace std;
 #include <map>
 #include "Resultat.h"
 #include "Empreinte.h"
+#include "Lecteur.h"
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -35,7 +36,8 @@ class Executer
 public:
 //----------------------------------------------------- Méthodes publiques
 
-    list<string> getMaladie() const;
+    
+    vector<string> getMaladie(Lecteur &l) const;
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
     //

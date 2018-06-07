@@ -11,8 +11,9 @@ e-mail               : $EMAIL$
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include systeme
-using namespace std;
 #include <iostream>
+using namespace std;
+
 //------------------------------------------------------ Include personnel
 #include "Empreinte.h"
 
@@ -23,6 +24,10 @@ using namespace std;
 //----------------------------------------------------- Methodes publiques
 list<Attribut> Empreinte::getValeur() const {
 	return valeur;
+}
+
+void Empreinte::addValeur(Attribut a){
+    valeur.push_back(a);
 }
 
 string Empreinte::getMaladie() const{
