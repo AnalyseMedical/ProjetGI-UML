@@ -164,11 +164,11 @@ void Lecteur::calculMoyenne(){
         size_t taille = vectorA.size();
         for (int i = 0; i < taille; ++i)
         {
-            if (vectorA[i].getType() == STRING)
+            if (vectAt[i].getType() == STRING)
             {
                 string meilleurString;
                 int maxOccur = 0;
-                for (const auto & stringEtOccurence : maladieStrings[itD->first][vectorA[i].getNom()])
+                for (const auto & stringEtOccurence : maladieStrings[itD->first][vectAt[i].getNom()])
                 {
                     if (maxOccur < stringEtOccurence.second)
                     {
@@ -220,7 +220,7 @@ void Lecteur::calculMoyenne(){
     
      // affichage de la moyenne
     for(int i = 0; i < moyenne.size(); i++){
-            cout << moyenne[i] << " ";
+        cout << "moyenne : " << moyenne[i] << " ";
         }
 }
 
@@ -301,14 +301,21 @@ Resultat Lecteur::chercherMaladie(Empreinte e){
 
 
 double Lecteur::testMaladie(Empreinte temoin,Empreinte e){
-    int size = e.getValeur().size();
+    vector<Attribut> tmp = e.getValeur();
+    std::vector<Attribut> vectEmpreinte(++(tmp.begin()), tmp.end());
+    int size = vectEmpreinte.size();
     double distance = 0;
+    cout << " lol " << size << endl;
     for(int i = 0; i < size; ++i)
     {
+        cout << "[" << temoin.getValeur().at(i) << "] - ";
         if(temoin.getValeur().at(i).getType() == DOUBLE){
             cout << temoin.getValeur().at(i).getValeur() << endl;
             double moyenne = stod(temoin.getValeur().at(i).getValeur());
-            distance += abs(stod(e.getValeur().at(i).getValeur())-moyenne)*abs(stod(e.getValeur().at(i).getValeur())-moyenne);
+            cout << "--> " << vectEmpreinte.at(i) << endl;
+            distance += abs(stod(vectEmpreinte.at(i).getValeur())-moyenne)*abs(stod(vectEmpreinte.at(i).getValeur())-moyenne);
+        } else {
+            cout << "c'est un string" << endl;
         }
     }
     double proba = 0;
