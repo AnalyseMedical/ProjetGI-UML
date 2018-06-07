@@ -13,6 +13,7 @@ e-mail               : $EMAIL$
 //--------------------------------------------------- Interfaces utilisees
 using namespace std;
 #include <string>
+#include <iostream>
 
 //------------------------------------------------------------- Constantes
 enum Type {LONG, BOOL, INT, DOUBLE, STRING};

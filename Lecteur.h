@@ -24,7 +24,7 @@ using namespace std;
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
-typedef unordered_map<string,list<Empreinte>> donnees;
+typedef unordered_map<string,vector<Empreinte>> donnees;
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Lecteur>
@@ -51,7 +51,7 @@ public:
 
     void displayAttributs() const;
 
-    void displayList(list<Empreinte> l) const;
+    void displayVector(vector<Empreinte> l) const;
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
     //

@@ -18,6 +18,7 @@ using namespace std;
 #include "Lecteur.h"
 #include <stdlib.h>
 #include <sstream>
+#include <math.h>
 
 //------------------------------------------------------------- Constantes
 const char POINTVIRGULE = ';';
@@ -89,18 +90,17 @@ void Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
                 getline(iss2,maladie,SAUTDELIGNE);
                 e.setMaladie(maladie);
                 getline(iss2,tmp);
-                
                 if(data.find(e.getMaladie()) == data.end())
                 {
-                    list<Empreinte> listeE;
-                    listeE.push_back(e);
-                    data.insert(pair<string,list<Empreinte>>(e.getMaladie(),listeE));
+                    vector<Empreinte> vectorE;
+                    vectorE.push_back(e);
+                    data.insert(pair<string,vector<Empreinte>>(e.getMaladie(),vectorE));
                 } else
                 {
                     data.find(e.getMaladie())->second.push_back(e);
                 }
             }
-            calculMoyenne();
+            calculMoyenne();           
         } else if (aAnalyser == true){
             while(!fichierA.eof())
             {
@@ -127,24 +127,21 @@ void Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
 
 void Lecteur::calculMoyenne(){
     donnees::iterator itD;
-    list<Empreinte>::iterator itE;
-    list<Attribut>::iterator itA;
+    vector<Empreinte>::iterator itE;
+    vector<Attribut>::iterator itA;
     
     //calcul de la moyenne (somme des valeurs des attributs)
     for(itD = data.begin(); itD != data.end(); itD++){
         int nb = 0;
         vector<Attribut> vectAt(attributs.size()-1);
         int tmp = 0;
-        list<Attribut> listeA = itD->second.begin()->getValeur();
-        for(itA = ++(listeA.begin()); itA != listeA.end(); itA++){
-            vectAt[tmp++] = *itA;
-        }
-        
+        vector<Attribut> vectorA = itD->second.begin()->getValeur();
+        copy(vectorA.begin()+1,vectorA.end(),vectAt.begin());
         for (itE = ++(itD->second.begin()); itE != itD->second.end(); itE++)
         {
             int i = 0;
-            listeA = itE->getValeur();
-            for(itA = ++(listeA.begin()); itA != listeA.end(); itA++){
+            vectorA = itE->getValeur();
+            for(itA = ++(vectorA.begin()); itA != vectorA.end(); itA++){
                 Attribut a = *itA;
                 if(a.getType() == DOUBLE){
                         vectAt[i].setValeur(to_string( stod(vectAt[i].getValeur())  + stod(a.getValeur()) ));
@@ -208,15 +205,15 @@ void Lecteur::displayData()
     for(it = data.begin(); it != data.end(); it++)
     {
         cout << it->first << " et " << endl;
-        displayList(it->second);
+        displayVector(it->second);
         cout << endl;
 
     }
 }
 
-void Lecteur::displayList(list<Empreinte> l) const{
-    list<Empreinte> tmp = l;
-    list<Empreinte>::iterator it;
+void Lecteur::displayVector(vector<Empreinte> l) const{
+    vector<Empreinte> tmp = l;
+    vector<Empreinte>::iterator it;
     for(it = tmp.begin(); it != tmp.end(); it++)
     {
         cout << "valeur empreinte : " << *it << endl;
@@ -264,9 +261,9 @@ double Lecteur::testMaladie(Empreinte temoin,Empreinte e){
     double distance = 0;
     for(int i = 0; i < size; ++i)
     {
-        if(temoin.getValeur().at(i).getType == DOUBLE){
-            double moyenne = stod(temoin.getValeur().at(i));
-            distance += abs(stod(e.getValeur().at(i))-moyenne)*abs(stod(e.getValeur().at(i))-moyenne);
+        if(temoin.getValeur().at(i).getType() == DOUBLE){
+            long moyenne = stol(temoin.getValeur().at(i).getValeur());
+            distance += abs(stol(e.getValeur().at(i).getValeur())-moyenne)*abs(stol(e.getValeur().at(i).getValeur())-moyenne);
         }
     }
     double proba = 0;
