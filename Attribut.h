@@ -108,7 +108,6 @@ protected:
 //-------------------------------- Autres definitions dependantes de <Attribut>
 
 inline std::ostream & operator << (std::ostream & out, const Attribut & a) {
-	cout << "C'est l'affichage qui déconne frr" << endl;
     out << "(" << a.getNom() << ";" << a.getType() << "; valeur : " << a.getValeur() << ")" << flush;
     return out;
 }

@@ -88,7 +88,6 @@ void Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
                 getline(iss2,maladie,SAUTDELIGNE);
                 e.setMaladie(maladie);
                 getline(iss2,tmp);
-                
                 if(data.find(e.getMaladie()) == data.end())
                 {
                     vector<Empreinte> vectorE;
@@ -99,7 +98,7 @@ void Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
                     data.find(e.getMaladie())->second.push_back(e);
                 }
             }
-            calculMoyenne();
+            calculMoyenne();           
         } else if (aAnalyser == true){
             while(!fichierA.eof())
             {
@@ -135,10 +134,7 @@ void Lecteur::calculMoyenne(){
         vector<Attribut> vectAt(attributs.size()-1);
         int tmp = 0;
         vector<Attribut> vectorA = itD->second.begin()->getValeur();
-        for(itA = ++(vectAt.begin()); itA != vectorA.end(); itA++){
-            vectAt[tmp++] = *itA;
-        }
-        
+        copy(vectorA.begin()+1,vectorA.end(),vectAt.begin());
         for (itE = ++(itD->second.begin()); itE != itD->second.end(); itE++)
         {
             int i = 0;
