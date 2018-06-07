@@ -44,6 +44,9 @@ int Lecteur::chargerMetaDonnee(string lectStr)
     string value = "";
     if(fichier){
         getline(fichier,key,POINTVIRGULE);
+        if(key==""){
+            return 2;
+        }
         getline(fichier,value);
         while(!fichier.eof()){
 			getline(fichier,key,POINTVIRGULE);
@@ -325,15 +328,17 @@ Lecteur::~Lecteur ( )
 
 static Type StringToType(string s){
     Type t;
-    if(s=="NoId"){
+    if(s=="ID"){
         return t = LONG;
     }
-    if(s=="string"){
+    else if (s=="string"){
         return t = STRING;
     } else if(s=="double"){
         return t = DOUBLE;
-    } else {
+    } else if(s=="int"){
         return t = INT;
+    } else {
+        return t = INCONNU;
     }
 }
 

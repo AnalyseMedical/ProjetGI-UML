@@ -16,7 +16,7 @@ using namespace std;
 #include <iostream>
 
 //------------------------------------------------------------- Constantes
-enum Type {LONG, BOOL, INT, DOUBLE, STRING};
+enum Type {LONG, BOOL, INT, DOUBLE, STRING, INCONNU};
 
 //------------------------------------------------------------------ Types
 
