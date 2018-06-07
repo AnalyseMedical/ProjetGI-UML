@@ -12,7 +12,7 @@
 
 //--------------------------------------------------- Interfaces utilisées
 using namespace std;
-#include <list>
+#include <vector>
 #include <string>
 #include <iostream>
 #include <map>
@@ -36,7 +36,7 @@ class Executer
 public:
 //----------------------------------------------------- Méthodes publiques
 
-    
+
     vector<string> getMaladie(Lecteur &l) const;
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
@@ -51,7 +51,7 @@ public:
     // Contrat :
     //
 
-    list<Resultat> diagnostic(Empreinte e);
+    vector<Resultat> diagnostic(Empreinte e);
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
     //
@@ -71,7 +71,7 @@ public:
     //
     // Contrat :
     //
-    
+
 
 //------------------------------------------------- Surcharge d'opérateurs
 

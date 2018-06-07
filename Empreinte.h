@@ -12,7 +12,7 @@ e-mail               : $EMAIL$
 
 //--------------------------------------------------- Interfaces utilisees
 #include "Attribut.h"
-#include <list>
+#include <vector>
 #include <string>
 
 //------------------------------------------------------------- Constantes
@@ -36,11 +36,11 @@ public:
 	//
 	// Contrat :
 	//
-	list<Attribut> getValeur() const;
+	vector<Attribut> getValeur() const;
     void addValeur(Attribut a);
 	string getMaladie() const;
 	void setMaladie(string uneMaladie);
-	void setValeur(list<Attribut> uneListe);
+	void setValeur(vector<Attribut> unVector);
 
 	//------------------------------------------------- Surcharge d'operateurs
 
@@ -58,7 +58,7 @@ public:
 	// Contrat :
 	//
 
-	Empreinte(list<Attribut> val, string UneMaladie );
+	Empreinte(vector<Attribut> val, string UneMaladie );
 
 	Empreinte();
 	// Mode d'emploi :
@@ -78,15 +78,15 @@ protected:
 	//----------------------------------------------------- Methodes protegees
 
 	//----------------------------------------------------- Attributs proteges
-	list<Attribut> valeur;
+	vector<Attribut> valeur;
 	string maladie;
 };
 
 //-------------------------------- Autres definitions dependantes de <Empreinte>
 
 inline std::ostream & operator << (std::ostream & out, const Empreinte & e) {
-    list<Attribut> tmp = e.getValeur();
-    for(list<Attribut>::iterator i = tmp.begin(); i != tmp.end();++i){
+    vector<Attribut> tmp = e.getValeur();
+    for(vector<Attribut>::iterator i = tmp.begin(); i != tmp.end();++i){
         out << *i << ";" << endl;
     }
 	//out << "(" << e.getMaladie() << ")" << endl;

@@ -22,7 +22,7 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Methodes publiques
-list<Attribut> Empreinte::getValeur() const {
+vector<Attribut> Empreinte::getValeur() const {
 	return valeur;
 }
 
@@ -38,8 +38,8 @@ void Empreinte::setMaladie(string uneMaladie){
 	maladie = uneMaladie;
 }
 
-void Empreinte::setValeur(list<Attribut> uneListe) {
-	valeur = uneListe;
+void Empreinte::setValeur(vector<Attribut> unVector) {
+	valeur = unVector;
 } 
 // type Empreinte::Methode ( liste des parametres )
 // Algorithme :
@@ -66,7 +66,7 @@ Empreinte::Empreinte(const Empreinte & unEmpreinte)
 Empreinte::Empreinte(){};
 
 
-Empreinte::Empreinte(list<Attribut> val, string UneMaladie)
+Empreinte::Empreinte(vector<Attribut> val, string UneMaladie)
 // Algorithme :
 //
 {

@@ -264,8 +264,8 @@ double Lecteur::testMaladie(Empreinte temoin,Empreinte e){
     for(int i = 0; i < size; ++i)
     {
         if(temoin.getValeur().at(i).getType() == DOUBLE){
-            double moyenne = stod(temoin.getValeur().at(i));
-            distance += abs(stod(e.getValeur().at(i))-moyenne)*abs(stod(e.getValeur().at(i))-moyenne);
+            long moyenne = stol(temoin.getValeur().at(i).getValeur());
+            distance += abs(stol(e.getValeur().at(i).getValeur())-moyenne)*abs(stol(e.getValeur().at(i).getValeur())-moyenne);
         }
     }
     double proba = 0;

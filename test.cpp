@@ -9,8 +9,8 @@ int main(){
 
     Lecteur l;
     l.chargerMetaDonnee("HealthMeasurementDescription.txt");
-    l.chargerDonnees("HealthMeasurementsWithLabels.txt");
-    list<Attribut> la;
+    l.chargerDonnees("HealthMeasurementsWithLabels.txt",false);
+    vector<Attribut> la;
     Attribut a = Attribut("A1",BOOL);
     Attribut a2 = Attribut("A2",STRING);
     Attribut a3 = Attribut("A3",STRING);
