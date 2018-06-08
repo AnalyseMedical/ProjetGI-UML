@@ -62,13 +62,6 @@ int TU11 () {
     cout << endl;
     cout << ">>> Test11: Lecture d'un fichier fonctionnel" << endl;
     Lecteur lecteur = Lecteur ();
-<<<<<<< HEAD
-    int tmp = lecteur.chargerMetaDonnee("HealthMeasurementDescription.txt");
-    cout << " valeur tmp " << tmp << endl;
-    tmp = lecteur.chargerDonnees("HealthMeasurementsWithLabels.txt", false);
-    cout << "valeur tmp (2) " << lecteur.displayAttributs() << endl;
-    return lecteur.chargerDonnees("Test11.txt", true);
-=======
     lecteur.chargerMetaDonnee("HealthMeasurementDescription.txt");
     lecteur.chargerDonnees("HealthMeasurementsWithLabels.txt", false);
     int code = lecteur.chargerDonnees("Test11.txt", true);
@@ -78,7 +71,6 @@ int TU11 () {
         cout << ">>>>>>  Test non validé : return code ";
     }
     return code;
->>>>>>> fe8ed48d795c6d3978d2d369913803547030026f
 }
 
 int TU12 () {
