@@ -25,6 +25,7 @@ const char POINTVIRGULE = ';';
 const char SAUTDELIGNE = '\r';
 
 const double MAX_DISTANCE = 1000000000;
+const double EPSILON = 0.1;
 //----------------------------------------------------------------- PUBLIC
 static Type StringToType(string s); 
 
@@ -54,6 +55,11 @@ int Lecteur::chargerMetaDonnee(string lectStr)
 			getline(fichier,value);
         }
         cout << "Fichier chargé" << endl;
+        for (size_t i = 0; i < attributs.size(); ++i)
+        {
+            eMin.push_back(attributs[i]);
+            eMax.push_back(attributs[i]);
+        }
         return 0;
     } else{
         cout << "Aucun fichier" << endl;
@@ -74,11 +80,23 @@ int Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
             string tmp ="";
             if(aAnalyser == false){
                 string firstLine = "";
+                int j = 0;
                 getline(fichierA,firstLine);
+                istringstream iss2(firstLine);
+                while(!iss2.eof() && j < (attributs.size()))
+                {
+                    getline(iss2,value,POINTVIRGULE);
+                    if(value != attributs[j++].getNom())
+                    {
+                        cout << value << " et " << attributs[j-1].getNom();
+                        cout << "le fichier d'empreinte ne correspond pas à celui de méta-donnée" << endl;
+                        return -1;
+                    }
+                }
                 //Code pour lire les empreintes :
                 while(!fichierA.eof())
                 {
-                    int j = 0;
+                    j = 0;
                     getline(fichierA,line);
                     istringstream iss2(line);
                     Empreinte e;
@@ -92,6 +110,7 @@ int Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
                     getline(iss2,maladie,SAUTDELIGNE);
                     e.setMaladie(maladie);
                     
+                    size_t i = 0;
                     //-------- code ajouté
                     for (const Attribut & a : e.getValeur())
                     {
@@ -99,13 +118,26 @@ int Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
                         {
                             if (maladieStrings[maladie][a.getNom()].find(a.getValeur()) == maladieStrings[maladie][a.getNom()].end())
                             {
-                                maladieStrings[maladie][a.getNom()][a.getValeur()] = 0;
+                                maladieStrings[maladie][a.getNom()][a.getValeur()] = 1;
                             }
                             else
                             {
                                 maladieStrings[maladie][a.getNom()][a.getValeur()] += 1;
                             }
                         }
+                        else
+                        {
+                            if (eMin[i].getValeur() == "" || stod(eMin[i].getValeur()) > stod(a.getValeur()))
+                            {
+                                eMin[i].setValeur(a.getValeur());
+                            }
+                            
+                            if (eMax[i].getValeur() == "" || stod(eMax[i].getValeur()) < stod(a.getValeur()))
+                            {
+                                eMax[i].setValeur(a.getValeur());
+                            }
+                        }
+                        i++;
                     }
                     //-------------------
                     
@@ -120,8 +152,28 @@ int Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
                         data.find(e.getMaladie())->second.push_back(e);
                     }
                 }
+                for (int i = 0; i < eMin.size(); ++i)
+                {
+                    if (eMin[i].getType() == DOUBLE)
+                        eEtendue.push_back(Attribut(eMin[i].getNom(), eMin[i].getType(), to_string(stod(eMax[i].getValeur()) - stod(eMin[i].getValeur()))));
+                    else
+                        eEtendue.push_back(Attribut());
+                }
             calculMoyenne();           
         } else if (aAnalyser == true){
+            string firstLine = "";
+            int j = 0;
+            getline(fichierA,firstLine);
+            istringstream iss2(firstLine);
+            while(!iss2.eof() && j < (attributs.size()))
+            {
+                getline(iss2,value,POINTVIRGULE);
+                if(value != attributs[j++].getNom())
+                {
+                    cout << "le fichier d'empreinte ne correspond pas à celui de méta-donnée" << endl;
+                    return -1;
+                }
+            }
             while(!fichierA.eof())
             {
                 int j = 0;
@@ -164,7 +216,7 @@ void Lecteur::calculMoyenne(){
     
     //calcul de la moyenne (somme des valeurs des attributs)
     for(itD = data.begin(); itD != data.end(); itD++){
-        int nb = 0;
+        int nb = 1;
         vector<Attribut> vectAt(attributs.size()-1);
         int tmp = 0;
         vector<Attribut> vectorA = itD->second.begin()->getValeur();
@@ -226,11 +278,6 @@ void Lecteur::calculMoyenne(){
         e.setMaladie(itD->first);
         moyenne.push_back(e);
     }
-    
-     // affichage de la moyenne
-    for(int i = 0; i < moyenne.size(); i++){
-        cout << "moyenne : " << moyenne[i] << " ";
-        }
 }
 
 // type Lecteur::Méthode ( liste des paramètres )
@@ -281,7 +328,8 @@ void Lecteur::displayVector(vector<Empreinte> l) const{
 
 vector<pair<Empreinte,Resultat>> Lecteur::diagnostic(string nomFichierEmpreinte){
     vector<pair<Empreinte,Resultat>> res;
-    chargerDonnees(nomFichierEmpreinte,true);
+    if( chargerDonnees(nomFichierEmpreinte,true) == -1)
+        return {};
     int size = emp_aAnalyser.size();
     for(int i = 0; i < size; ++i){
         Resultat r = chercherMaladie(emp_aAnalyser[i]);
@@ -294,24 +342,27 @@ vector<pair<Empreinte,Resultat>> Lecteur::diagnostic(string nomFichierEmpreinte)
 Resultat Lecteur::chercherMaladie(Empreinte e){
     string maladie = "";
     double distanceActuelle = MAX_DISTANCE;
-    double distancetotale = 0;
+    double distanceNonMalade = 0;
     int size = moyenne.size();
     for (int i = 0; i < size; ++i)
     {
-        cout << size << endl;
-        if(moyenne[i].getMaladie() !=""){
-            Empreinte temoin = moyenne[i];
-            double tmp = testMaladie(temoin,e);
-            distancetotale += tmp;
-            if(tmp < distanceActuelle){
-                distanceActuelle = tmp;
-                maladie = temoin.getMaladie();
-             }
-          }
+        Empreinte temoin = moyenne[i];
+        double tmp = testMaladie(temoin,e);
+        if(temoin.getMaladie() == "")
+            distanceNonMalade = tmp;
+        if(tmp < distanceActuelle){
+            distanceActuelle = tmp;
+            maladie = temoin.getMaladie();
+        }
     }
-    double probabilite = 100*(1-distanceActuelle/distancetotale);
-    Resultat r(maladie,probabilite);
-    return r;
+    if(distanceNonMalade != distanceActuelle){
+        double probabilite = 100*(1-distanceActuelle/distanceNonMalade);
+        Resultat r(maladie,probabilite);
+        return r;
+    } else {
+        Resultat r("",0);
+        return r;
+    }
 }
 
 
@@ -319,21 +370,23 @@ double Lecteur::testMaladie(Empreinte temoin,Empreinte e){
     vector<Attribut> tmp = e.getValeur();
     std::vector<Attribut> vectEmpreinte(++(tmp.begin()), tmp.end());
     int size = vectEmpreinte.size();
-    double distance = 0;
-    cout << " lol " << size << endl;
+    double somme = 0;
+    int distance = 0;
+    double countString = 0;
     for(int i = 0; i < size; ++i)
     {
-        cout << "[" << temoin.getValeur().at(i) << "] - ";
-        if(temoin.getValeur().at(i).getType() == DOUBLE){
-            cout << temoin.getValeur().at(i).getValeur() << endl;
-            double moyenne = stod(temoin.getValeur().at(i).getValeur());
-            cout << "--> " << vectEmpreinte.at(i) << endl;
-            distance += abs(stod(vectEmpreinte.at(i).getValeur())-moyenne)*abs(stod(vectEmpreinte.at(i).getValeur())-moyenne);
-        } else {
-            cout << "c'est un string" << endl;
+        if(temoin.getValeur()[i].getType() == DOUBLE){
+            double moyenne = stod(temoin.getValeur()[i].getValeur());
+            distance += abs(stod(vectEmpreinte[i].getValeur())-moyenne)*abs(stod(vectEmpreinte[i].getValeur())-moyenne);
+        } else if(temoin.getValeur()[i].getType() == STRING){
+            string valeurTemoin = temoin.getValeur()[i].getValeur();
+            string valeurEmpreinte = e.getValeur()[i+1].getValeur();
+            if(valeurTemoin.compare(valeurEmpreinte) != 0){
+                countString++;
+            }
         }
     }
-    double proba = 0;
+    distance = (1.0+countString/(double)size)*distance;
     return sqrt(distance);
 }
 

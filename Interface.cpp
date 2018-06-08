@@ -30,15 +30,37 @@ std::string nomFichierEmpreinte;
 //----------------------------------------------------- Méthodes publiques
 int main(void)
 {
+    // Creation inteface
     Interface i;
-    cout << "Entrer le nom d'un fichier de métadonnées : " << endl;
-    nomFichierMeta = "HealthMeasurementDescription.txt";
-    Lecteur l;
-    l.chargerMetaDonnee("HealthMeasurementDescription.txt");
-    cout << "Entrer le nom d'un fichier de données empreintes : " << endl;
-    nomFichierDonnees = "HealthMeasurementsWithLabels.txt";
-    l.chargerDonnees("HealthMeasurementsWithLabels.txt",false);
-    i.afficherOperation(l);
+    bool quitter = false;
+    string quitInterface = "";
+    while(quitter == false){
+        cout << " appuyez sur c pour continuer, q pour quitter " << endl;
+        cin >> quitInterface;
+        //condition pour savoir si l'on quitte l'application
+        if(quitInterface.compare("q") == 0)
+            return 0;
+        //Lecteur pour lire les fichiers
+        Lecteur l;
+        cout << "Entrer le nom d'un fichier de métadonnées : " << endl;
+        cin >> nomFichierMeta;
+        // fichier de méta donnée
+        int testChargementMd = l.chargerMetaDonnee(nomFichierMeta);
+        // si la lecture à échoué
+        if(testChargementMd != 0)
+            continue;
+        cout << "Entrer le nom d'un fichier de données empreintes : " << endl;
+        cin >> nomFichierDonnees;
+        //std::chrono::time_point<std::chrono::system_clock> start, end;
+        //start = std::chrono::system_clock::now();
+        int testChargementDonnee = l.chargerDonnees(nomFichierDonnees,false);
+        //end = std::chrono::system_clock::now();
+        //int elapsed_seconds = std::chrono::duration_cast<std::chrono::seconds>(end-start).count();
+        //cout << " le temps :  " <<elapsed_seconds << endl;
+        if(testChargementDonnee != 0)
+            continue;
+        i.afficherOperation(l);
+    }
     return 0;
 }
 
@@ -54,23 +76,21 @@ void Interface::afficherOperation(Lecteur &l){
 		cout << "0 : Exit " << endl;
 
 		cin >> operation;
-
-		switch (operation) {
-			case 1 :
-                cout << "Entrer le nom d'un fichier de données empreintes : " << endl;
-                cin >> nomFichierEmpreinte;
-				this->demandeDiagnostic(nomFichierEmpreinte,l);
-				break;
-			case 2 :
-				this->afficherMaladie(l);
-				break;
-			case 0 :
-				break;
-            default :
-                break;
-		}
-	}
-
+            switch (operation) {
+                case 1 :
+                    cout << "Entrer le nom d'un fichier de données empreintes : " << endl;
+                    cin >> nomFichierEmpreinte;
+                    this->demandeDiagnostic(nomFichierEmpreinte,l);
+                    break;
+                case 2 :
+                    this->afficherMaladie(l);
+                    break;
+                case 0 :
+                    break;
+                default :
+                    break;
+            }
+        }
 } //----- Fin de afficherOperation
 
 void Interface::afficherMaladie(Lecteur &l){
@@ -86,10 +106,18 @@ void Interface::afficherMaladie(Lecteur &l){
 void Interface::demandeDiagnostic(string nomFichierEmpreinte,Lecteur &l){
 	// Algorithme :
     vector<pair<Empreinte, Resultat>> resultat = l.diagnostic(nomFichierEmpreinte);
-    ofstream sortie("resultat.txt");
     int size = resultat.size();
+    if(size == 0)
+        return;
+    cout << " entrer le nom du fichier de sortie : " << endl;
+    string fichierSortie = "";
+    cin >> fichierSortie;
+    ofstream sortie(fichierSortie);
     for(int i = 0; i < size; ++i){
-        sortie << resultat[i].first << resultat[i].second << endl;
+        if(resultat[i].second.getMaladie() != "")
+            sortie << resultat[i].first << resultat[i].second << endl;
+        else
+            sortie << resultat[i].first << endl;
     }
 } //----- Fin de demandeDiagnostic
 

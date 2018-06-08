@@ -109,7 +109,7 @@ int TU32 () {
 
 //Production fichier résultat
 
-int main TU41() {
+int TU41() {
     cout << "Test41:Lancer la production d'un fichier résultat lorsqu'aucune donnée n'a été chargée" << endl;
     return 0;
 }

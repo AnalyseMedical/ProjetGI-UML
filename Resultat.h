@@ -69,6 +69,10 @@ public:
     //
     // Contrat :
     //
+    
+    string getMaladie(){
+        return maladie;
+    }
 
     void setMaladie(string uneMaladie){
         maladie = uneMaladie;

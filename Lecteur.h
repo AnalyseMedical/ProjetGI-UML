@@ -102,6 +102,9 @@ protected:
     vector<Empreinte> emp_aAnalyser;
     vector<Empreinte> moyenne;
     unordered_map<string, unordered_map<string, unordered_map<string, int>>> maladieStrings;
+    vector<Attribut> eMin;
+    vector<Attribut> eMax;
+    vector<Attribut> eEtendue;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Lecteur>
