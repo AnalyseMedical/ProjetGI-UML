@@ -27,7 +27,7 @@ const char SAUTDELIGNE = '\r';
 const double MAX_DISTANCE = 1000000000;
 const double EPSILON = 0.1;
 //----------------------------------------------------------------- PUBLIC
-static Type StringToType(string s); 
+static Type StringToType(string s);
 
 //----------------------------------------------------- Méthodes publiques
 
@@ -39,35 +39,39 @@ void Lecteur::displayEmpreinte(){
 
 int Lecteur::chargerMetaDonnee(string lectStr)
 {
-    ifstream fichier;
-    fichier.open(lectStr);
-    string key = "";
-    string value = "";
-    if(fichier){
-        getline(fichier,key,POINTVIRGULE);
-        getline(fichier,value);
-        while(!fichier.eof()){
-			getline(fichier,key,POINTVIRGULE);
-			getline(fichier,value,SAUTDELIGNE);
-			Type t = StringToType(value);
-			Attribut attribut = Attribut(key,t);
-			attributs.push_back(attribut);
-			getline(fichier,value);
+        ifstream fichier;
+        fichier.open(lectStr);
+        string key = "";
+        string value = "";
+        if(fichier){
+            getline(fichier,key,POINTVIRGULE);
+            if(key==""){
+                cerr << "Fichier vide" << endl;
+                return 2;
+            }
+            getline(fichier,value);
+            while(!fichier.eof()){
+                getline(fichier,key,POINTVIRGULE);
+                getline(fichier,value,SAUTDELIGNE);
+                Type t = StringToType(value);
+                Attribut attribut = Attribut(key,t);
+                attributs.push_back(attribut);
+                getline(fichier,value);
+            }
+            cout << "Fichier chargé" << endl;
+            for (size_t i = 0; i < attributs.size(); ++i)
+            {
+                eMin.push_back(attributs[i]);
+                eMax.push_back(attributs[i]);
+            }
+            return 0;
+        } else{
+            cout << "Aucun fichier" << endl;
+            return -1;
         }
-        cout << "Fichier chargé" << endl;
-        for (size_t i = 0; i < attributs.size(); ++i)
-        {
-            eMin.push_back(attributs[i]);
-            eMax.push_back(attributs[i]);
-        }
-        return 0;
-    } else{
-        cout << "Aucun fichier" << endl;
-        return -1;
-    }
 }
 
-//lit le fichier de donn�e :
+//lit le fichier de donnee :
 int Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
 {
     ifstream fichierA;
@@ -94,6 +98,7 @@ int Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
                     }
                 }
                 //Code pour lire les empreintes :
+                bool fichierEstVide=true;
                 while(!fichierA.eof())
                 {
                     j = 0;
@@ -102,6 +107,7 @@ int Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
                     Empreinte e;
                     while(!iss2.eof() && j < (attributs.size()))
                     {
+                        fichierEstVide=false;
                         getline(iss2,value,POINTVIRGULE);
                         Attribut a = Attribut(attributs[j].getNom(),attributs[j].getType(),value);
                         j++;
@@ -140,7 +146,7 @@ int Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
                         i++;
                     }
                     //-------------------
-                    
+
                     getline(iss2,tmp);
                     if(data.find(e.getMaladie()) == data.end())
                     {
@@ -152,6 +158,7 @@ int Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
                         data.find(e.getMaladie())->second.push_back(e);
                     }
                 }
+
                 for (int i = 0; i < eMin.size(); ++i)
                 {
                     if (eMin[i].getType() == DOUBLE)
@@ -159,7 +166,14 @@ int Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
                     else
                         eEtendue.push_back(Attribut());
                 }
-            calculMoyenne();           
+
+                if(fichierEstVide){
+                    cerr<<"Fichier vide"<<endl;
+                    return 3;
+                }
+                calculMoyenne();
+            
+
         } else if (aAnalyser == true){
             string firstLine = "";
             int j = 0;
@@ -194,17 +208,24 @@ int Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
                 emp_aAnalyser.push_back(e);
                 //displayEmpreinte();
             }
-            cout << "Fichier de données chargé" << endl;
+            if (aAnalyser) {
+                cout << "Fichier de données empreintes à analyser chargé" << endl;
+            } else {
+                cout << "Fichier de données maladies chargé" << endl;
+            }
             return 0;
+        } else {
+            cerr << " Aucun fichier " << endl;
+            return 2;
             //return donnee;
         }
-    } else {
-        cout << " Aucun fichier " << endl;
-        return -1;
-    }
+        } else {
+            cerr << " Aucun fichier le dernier " << endl;
+            return 2;
+        }
     } catch (exception e) {
-        cout << "Erreur lors de la lecture" << endl;
-        return -1;
+        cerr << "Erreur lors de la lecture" << endl;
+        return 1;
     }
     return 0;
 }
@@ -213,7 +234,7 @@ void Lecteur::calculMoyenne(){
     donnees::iterator itD;
     vector<Empreinte>::iterator itE;
     vector<Attribut>::iterator itA;
-    
+
     //calcul de la moyenne (somme des valeurs des attributs)
     for(itD = data.begin(); itD != data.end(); itD++){
         int nb = 1;
@@ -221,7 +242,7 @@ void Lecteur::calculMoyenne(){
         int tmp = 0;
         vector<Attribut> vectorA = itD->second.begin()->getValeur();
         copy(vectorA.begin()+1,vectorA.end(),vectAt.begin());
-        
+
         size_t taille = vectorA.size();
         for (int i = 0; i < taille; ++i)
         {
@@ -240,7 +261,7 @@ void Lecteur::calculMoyenne(){
                 vectAt[i].setValeur(meilleurString);
             }
         }
-        
+
         for (itE = ++(itD->second.begin()); itE != itD->second.end(); itE++)
         {
             int i = 0;
@@ -259,7 +280,7 @@ void Lecteur::calculMoyenne(){
             }
             nb++;
         }
-        
+
         //calcul de la moyenne (division)
         int size = vectAt.size();
         Empreinte e;
@@ -299,7 +320,7 @@ int Lecteur::displayAttributs() const
     return 0;
 }
 
-int Lecteur::displayData() 
+int Lecteur::displayData()
 {
     if(data.begin() == data.end()) {
         cout << "Donnee abscente" << endl;
@@ -427,15 +448,17 @@ Lecteur::~Lecteur ( )
 
 static Type StringToType(string s){
     Type t;
-    if(s=="NoId"){
+    if(s=="ID"){
         return t = LONG;
     }
-    if(s=="string"){
+    else if (s=="string"){
         return t = STRING;
     } else if(s=="double"){
         return t = DOUBLE;
-    } else {
+    } else if(s=="int"){
         return t = INT;
+    } else {
+        return t = INCONNU;
     }
 }
 
