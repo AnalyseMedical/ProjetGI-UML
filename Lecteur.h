@@ -52,6 +52,8 @@ public:
 
     int displayAttributs() const;
 
+    vector<string> getMaladie() ;
+
     void displayVector(vector<Empreinte> l) const;
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :

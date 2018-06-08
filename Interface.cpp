@@ -70,6 +70,7 @@ void Interface::afficherOperation(Lecteur &l){
 	int operation = -1;
 
 	while (operation!=0) {
+        // opération réalisable par l'interface.
 		cout << "Veuillez choisir l'opération à effectuer : " << endl;
 		cout << "1 : Demander un diagnostic " << endl;
 		cout << "2 : Afficher les maladies connues " << endl;
@@ -94,8 +95,8 @@ void Interface::afficherOperation(Lecteur &l){
 } //----- Fin de afficherOperation
 
 void Interface::afficherMaladie(Lecteur &l){
-	// Algorithme :
-    vector<string> maladie = exe.getMaladie(l);
+	// affiche les maladies prises en compte par l'application
+    vector<string> maladie = l.getMaladie();
     int nbMaladie = maladie.size();
     for(int i = 0; i < nbMaladie ;++i){
         cout << maladie[i] << endl;
@@ -103,24 +104,25 @@ void Interface::afficherMaladie(Lecteur &l){
 } //----- Fin de afficherMaladie
 
 
-int Interface::demandeDiagnostic(string nomFichierEmpreinte,Lecteur &l){
-	// Algorithme :
+void Interface::demandeDiagnostic(string nomFichierEmpreinte,Lecteur &l){
+	// recupere l'analyse des empreintes
     vector<pair<Empreinte, Resultat>> resultat = l.diagnostic(nomFichierEmpreinte);
+    // on verifie que la taille des données n'est pas vide
     int size = resultat.size();
     if(size == 0)
         return;
+    // on envoie la sortie sur un nouveau fichier
     cout << " entrer le nom du fichier de sortie : " << endl;
     string fichierSortie = "";
     cin >> fichierSortie;
     ofstream sortie(fichierSortie);
     for(int i = 0; i < size; ++i){
         if(resultat[i].second.getMaladie() != "")
-            sortie << resultat[i].first << resultat[i].second << endl;
+            sortie << resultat[i].first << resultat[i].second << "%" << endl;
         else
             sortie << resultat[i].first << endl;
     }
     cout << "Fichier résultat créé" << endl;
-    return 0;
 } //----- Fin de demandeDiagnostic
 
 
