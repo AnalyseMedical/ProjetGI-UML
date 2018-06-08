@@ -21,7 +21,7 @@ int TU02 () {
     cout << endl;
     cout << ">>> Test02 : Lecture d'un fichier vide" << endl;
     Lecteur lecteur = Lecteur ();
-    int code = lecteur.chargerMetaDonnee("Test03.txt");
+    int code = lecteur.chargerMetaDonnee("Test02.txt");
     if (code == 2) {
         cout << ">>>>>>  Test validé : return code ";
     } else {
@@ -34,7 +34,7 @@ int TU03 () {
     cout << endl;
     cout << ">>> Test03 : Aucun fichier correspondant" << endl;
     Lecteur lecteur = Lecteur ();
-    int code = lecteur.chargerMetaDonnee("Test04.txt");
+    int code = lecteur.chargerMetaDonnee("Test03.txt");
     if (code == -1) {
         cout << ">>>>>>  Test validé : return code ";
     } else {
