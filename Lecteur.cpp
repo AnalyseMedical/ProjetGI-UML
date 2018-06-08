@@ -37,7 +37,7 @@ void Lecteur::displayEmpreinte(){
         cout << emp_aAnalyser[i];
 }
 
-vector<string> Lecteur::getMaladie() const {
+vector<string> Lecteur::getMaladie() {
     vector<string> result;
     donnees tmp = data;
     donnees::iterator it;
@@ -360,8 +360,22 @@ void Lecteur::displayVector(vector<Empreinte> l) const{
 
 vector<pair<Empreinte,Resultat>> Lecteur::diagnostic(string nomFichierEmpreinte){
     vector<pair<Empreinte,Resultat>> res;
-    if( chargerDonnees(nomFichierEmpreinte,true) == -1)
+    if( data.empty() && emp_aAnalyser.empty()){
+        cerr << "Aucune donnée chargée" << endl;
         return {};
+    }
+    if(data.empty() && !(emp_aAnalyser.empty())){
+        cerr << "Aucun fichier maladie chargé" << endl;
+        return {};
+    }
+    if(chargerDonnees(nomFichierEmpreinte,true) == -1){
+        return{};
+    }
+    
+    if(emp_aAnalyser.empty() && !(data.empty())){
+        cerr << "Aucun fichier empreinte chargé" << endl;
+        return {};
+    }
     int size = emp_aAnalyser.size();
     for(int i = 0; i < size; ++i){
         Resultat r = chercherMaladie(emp_aAnalyser[i]);

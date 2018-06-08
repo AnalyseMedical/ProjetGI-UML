@@ -205,6 +205,7 @@ int TU42() {
     cout << ">>> Test42:Production d'un fichier résultat après chargement d'une empreinte conforme mais sans fichier maladie" << endl;
     Lecteur lecteur = Lecteur();
     lecteur.chargerMetaDonnee("HealthMeasurementDescription.txt");
+    lecteur.chargerDonnees("HealthMeasurementsWithLabels.txt", true);
     lecteur.diagnostic("Test42.txt");
     return 0;
 }
