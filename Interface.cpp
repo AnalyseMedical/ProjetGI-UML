@@ -103,7 +103,7 @@ void Interface::afficherMaladie(Lecteur &l){
 } //----- Fin de afficherMaladie
 
 
-void Interface::demandeDiagnostic(string nomFichierEmpreinte,Lecteur &l){
+int Interface::demandeDiagnostic(string nomFichierEmpreinte,Lecteur &l){
 	// Algorithme :
     vector<pair<Empreinte, Resultat>> resultat = l.diagnostic(nomFichierEmpreinte);
     int size = resultat.size();
@@ -119,6 +119,8 @@ void Interface::demandeDiagnostic(string nomFichierEmpreinte,Lecteur &l){
         else
             sortie << resultat[i].first << endl;
     }
+    cout << "Fichier résultat créé" << endl;
+    return 0;
 } //----- Fin de demandeDiagnostic
 
 

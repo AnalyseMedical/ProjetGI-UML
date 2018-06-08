@@ -49,7 +49,7 @@ public:
     // Contrat :
     //
 
-    void demandeDiagnostic(string nomFichierEmpreinte, Lecteur &l);
+    int demandeDiagnostic(string nomFichierEmpreinte, Lecteur &l);
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
     //
