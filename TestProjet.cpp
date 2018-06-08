@@ -34,6 +34,7 @@ int TU11 () {
     cout << "Test11: Lecture d'un fichier fonctionnel" << endl;
     Lecteur lecteur = Lecteur ();
     lecteur.chargerMetaDonnee("HealthMeasurementDescription.txt");
+    lecteur.chargerDonnees("HealthMeasurementsWithLabels.txt", false);
     return lecteur.chargerDonnees("Test11.txt", true);
 }
 
@@ -41,6 +42,7 @@ int TU12 () {
     cout << "Test12: Lecture d'un fichier corrompu" << endl;
     Lecteur lecteur = Lecteur ();
     lecteur.chargerMetaDonnee("HealthMeasurementDescription.txt");
+    lecteur.chargerDonnees("HealthMeasurementsWithLabels.txt", false);
     return lecteur.chargerDonnees("Test12.txt", true);
 }
 
@@ -48,20 +50,22 @@ int TU13 () {
     cout << "Test13: Lecture d'un fichier vide" << endl;
     Lecteur lecteur = Lecteur ();
     lecteur.chargerMetaDonnee("HealthMeasurementDescription.txt");
+    lecteur.chargerDonnees("HealthMeasurementsWithLabels.txt", false);
     return lecteur.chargerDonnees("Test13.txt", true);
 }
 
-int TU14 () {
-    cout << "Test14: Aucun fichier correspondant" << endl;
+int TU14() {
+    cout << "Test14: Lecture d'un fichier empreinte sans chargement du fichier maladies" << endl;
     Lecteur lecteur = Lecteur ();
     lecteur.chargerMetaDonnee("HealthMeasurementDescription.txt");
     return lecteur.chargerDonnees("Test14.txt", true);
 }
 
 int TU15 () {
-    cout << "Test15: Lecture d'un fichier outrageusement volumineux" << endl;
+    cout << "Test15: Aucun fichier correspondant" << endl;
     Lecteur lecteur = Lecteur ();
     lecteur.chargerMetaDonnee("HealthMeasurementDescription.txt");
+    lecteur.chargerDonnees("HealthMeasurementsWithLabels.txt", false);
     return lecteur.chargerDonnees("Test15.txt", true);
 }
 
@@ -166,7 +170,7 @@ int main () {
     cout << TU14() << endl;
     cout << TU15() << endl;
 
-   /* cout << TU21() << endl;
+    cout << TU21() << endl;
     cout << TU22() << endl;
     cout << TU23() << endl;
     cout << TU24() << endl;
@@ -178,7 +182,7 @@ int main () {
     cout << TU41() << endl;
     cout << TU42() << endl;
     cout << TU43() << endl;
-    cout << TU44() << endl;*/
+    cout << TU44() << endl;
     //cout << TU45() << endl;
     return 0;
 }
