@@ -154,7 +154,6 @@ int TU31 () {
     cout << endl;
     cout << ">>> Test31: Demander un affichage lorsqu'aucune donnée n'est chargée" << endl;
     Lecteur lecteur = Lecteur ();
-    //lecteur.chargerMetaDonnee("HealthMeasurementDescription.txt");
     int code = lecteur.displayAttributs();
     if (code == 5) {
         cout << ">>>>>>  Test validé : return code ";
@@ -169,7 +168,6 @@ int TU32 () {
     cout << ">>> Test32: Demander un affichage lorsqu'un fichier est chargé" << endl;
     Lecteur lecteur = Lecteur ();
     lecteur.chargerMetaDonnee("HealthMeasurementDescription.txt");
-    //lecteur.chargerDonnees("HealthMeasurementsWithLabels.txt", false);
     int code = lecteur.displayAttributs();
     if (code == 0) {
         cout << ">>>>>>  Test validé : return code ";
