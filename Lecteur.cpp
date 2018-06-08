@@ -58,7 +58,7 @@ int Lecteur::chargerMetaDonnee(string lectStr)
                 attributs.push_back(attribut);
                 getline(fichier,value);
             }
-            cout << "Fichier chargé" << endl;
+            cout << "Fichier de MétaDonnée chargé" << endl;
             for (size_t i = 0; i < attributs.size(); ++i)
             {
                 eMin.push_back(attributs[i]);
@@ -92,9 +92,8 @@ int Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
                     getline(iss2,value,POINTVIRGULE);
                     if(value != attributs[j++].getNom())
                     {
-                        cout << value << " et " << attributs[j-1].getNom();
                         cout << "le fichier d'empreinte ne correspond pas à celui de méta-donnée" << endl;
-                        return -1;
+                        return 1;
                     }
                 }
                 //Code pour lire les empreintes :
@@ -185,7 +184,7 @@ int Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
                 if(value != attributs[j++].getNom())
                 {
                     cout << "le fichier d'empreinte ne correspond pas à celui de méta-donnée" << endl;
-                    return -1;
+                    return 1;
                 }
             }
             while(!fichierA.eof())
@@ -216,16 +215,16 @@ int Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
             return 0;
         } else {
             cerr << " Aucun fichier " << endl;
-            return 2;
+            return -1;
             //return donnee;
         }
         } else {
-            cerr << " Aucun fichier le dernier " << endl;
-            return 2;
+            cerr << " Aucun fichier " << endl;
+            return -1;
         }
     } catch (exception e) {
         cerr << "Erreur lors de la lecture" << endl;
-        return 1;
+        return 4;
     }
     return 0;
 }
@@ -315,7 +314,7 @@ int Lecteur::displayAttributs() const
     }
     for(int i =0;i<attributs.size();i++)
     {
-        cout << attributs[i] << endl;
+        cout << attributs[i].getNom() << endl;
     }
     return 0;
 }

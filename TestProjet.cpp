@@ -111,7 +111,7 @@ int TU25 () {
 int TU31 () {
     cout << "Test31: Demander un affichage lorsqu'aucune donnée n'est chargée" << endl;
     Lecteur lecteur = Lecteur ();
-    lecteur.chargerMetaDonnee("HealthMeasurementDescription.txt");
+    //lecteur.chargerMetaDonnee("HealthMeasurementDescription.txt");
     return lecteur.displayAttributs();
 }
 
@@ -119,7 +119,7 @@ int TU32 () {
     cout << "Test32: Demander un affichage lorsqu'un fichier est chargé" << endl;
     Lecteur lecteur = Lecteur ();
     lecteur.chargerMetaDonnee("HealthMeasurementDescription.txt");
-    lecteur.chargerDonnees("HealthMeasurementsWithLabels.txt", false);
+    //lecteur.chargerDonnees("HealthMeasurementsWithLabels.txt", false);
     return lecteur.displayAttributs();
 }
 
@@ -165,16 +165,15 @@ int main () {
     cout << TU04() << endl;
 
     cout << TU11() << endl;
-    cout << TU12() << endl;
+    //cout << TU12() << endl;
     cout << TU13() << endl;
-    cout << TU14() << endl;
+    //cout << TU14() << endl;
     cout << TU15() << endl;
 
     cout << TU21() << endl;
     cout << TU22() << endl;
     cout << TU23() << endl;
     cout << TU24() << endl;
-    cout << TU25() << endl;
 
     cout << TU31() << endl;
     cout << TU32() << endl;
