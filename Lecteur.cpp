@@ -37,6 +37,18 @@ void Lecteur::displayEmpreinte(){
         cout << emp_aAnalyser[i];
 }
 
+vector<string> Lecteur::getMaladie() const {
+    vector<string> result;
+    donnees tmp = data;
+    donnees::iterator it;
+    for(it = tmp.begin(); it != tmp.end(); it++)
+    {
+        if(it->first != "")
+            result.push_back(it->first);
+    }
+    return result;
+}
+
 int Lecteur::chargerMetaDonnee(string lectStr)
 {
         ifstream fichier;
@@ -220,7 +232,7 @@ int Lecteur::chargerDonnees(string lectStr, bool aAnalyser)
             //return donnee;
         }
         } else {
-            cerr << " Aucun fichier le dernier " << endl;
+            cerr << " Aucun fichier " << endl;
             return 2;
         }
     } catch (exception e) {
@@ -315,7 +327,7 @@ int Lecteur::displayAttributs() const
     }
     for(int i =0;i<attributs.size();i++)
     {
-        cout << attributs[i] << endl;
+        cout << attributs[i].getType() << " " << attributs[i].getNom() << endl;
     }
     return 0;
 }

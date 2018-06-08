@@ -33,8 +33,10 @@ int TU04 () {
 int TU11 () {
     cout << "Test11: Lecture d'un fichier fonctionnel" << endl;
     Lecteur lecteur = Lecteur ();
-    lecteur.chargerMetaDonnee("HealthMeasurementDescription.txt");
-    lecteur.chargerDonnees("HealthMeasurementsWithLabels.txt", false);
+    int tmp = lecteur.chargerMetaDonnee("HealthMeasurementDescription.txt");
+    cout << " valeur tmp " << tmp << endl;
+    tmp = lecteur.chargerDonnees("HealthMeasurementsWithLabels.txt", false);
+    cout << "valeur tmp (2) " << lecteur.displayAttributs() << endl;
     return lecteur.chargerDonnees("Test11.txt", true);
 }
 

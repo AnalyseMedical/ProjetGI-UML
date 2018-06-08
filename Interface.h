@@ -10,7 +10,7 @@
 #define Interface_H
 
 //--------------------------------------------------- Interfaces utilisées
-#include "Executer.h"
+#include "Lecteur.h"
 #include <string>
 
 //------------------------------------------------------------- Constantes
@@ -29,10 +29,6 @@ class Interface
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    
-    Executer getExecuter(){
-        return exe;
-    }
     
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
@@ -90,7 +86,6 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-    Executer exe;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Interface>
