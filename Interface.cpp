@@ -122,7 +122,6 @@ void Interface::demandeDiagnostic(string nomFichierEmpreinte,Lecteur &l){
         else
             sortie << resultat[i].first << endl;
     }
-    cout << "Fichier résultat créé" << endl;
 } //----- Fin de demandeDiagnostic
 
 

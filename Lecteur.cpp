@@ -382,6 +382,7 @@ vector<pair<Empreinte,Resultat>> Lecteur::diagnostic(string nomFichierEmpreinte)
         pair<Empreinte,Resultat> pairAajouter(emp_aAnalyser[i],r);
         res.push_back(pairAajouter);
     }
+    cout << "Fichier résultat créé" << endl;
     return res;
 }
 

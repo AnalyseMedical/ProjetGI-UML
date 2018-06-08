@@ -19,20 +19,7 @@ int TU01 () {
 
 int TU02 () {
     cout << endl;
-    cout << ">>> Test02 : Lecture d'un fichier corrompu" << endl;
-    Lecteur lecteur = Lecteur ();
-    int code = lecteur.chargerMetaDonnee("Test02.txt");
-    if (code == 1) {
-        cout << ">>>>>>  Test validé : return code ";
-    } else {
-        cout << ">>>>>>  Test non validé : return code ";
-    }
-    return code;
-}
-
-int TU03 () {
-    cout << endl;
-    cout << ">>> Test03 : Lecture d'un fichier vide" << endl;
+    cout << ">>> Test02 : Lecture d'un fichier vide" << endl;
     Lecteur lecteur = Lecteur ();
     int code = lecteur.chargerMetaDonnee("Test03.txt");
     if (code == 2) {
@@ -43,9 +30,9 @@ int TU03 () {
     return code;
 }
 
-int TU04 () {
+int TU03 () {
     cout << endl;
-    cout << ">>> Test04 : Aucun fichier correspondant" << endl;
+    cout << ">>> Test03 : Aucun fichier correspondant" << endl;
     Lecteur lecteur = Lecteur ();
     int code = lecteur.chargerMetaDonnee("Test04.txt");
     if (code == -1) {
@@ -228,7 +215,7 @@ int TU44() {
     Lecteur lecteur = Lecteur();
     lecteur.chargerMetaDonnee("HealthMeasurementDescription.txt");
     lecteur.chargerDonnees("HealthMeasurementsWithLabels.txt", false);
-    lecteur.diagnostic("Test44.txt");
+    lecteur.diagnostic("test.txt");
     return 0;
 }
 
@@ -236,7 +223,6 @@ int main () {
     cout << TU01() << endl;
     cout << TU02() << endl;
     cout << TU03() << endl;
-    cout << TU04() << endl;
 
     cout << TU11() << endl;
     cout << TU12() << endl;
